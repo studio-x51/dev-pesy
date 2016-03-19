@@ -1,0 +1,101 @@
+[2015-12-03 10:28:27-0.14080400 1449134907,stefi ,debug,test:
+[2015-12-03 10:28:27-0.14096400 1449134907,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:28:27-0.14101400 1449134907,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:28:42-0.28652300 1449134922,stefi ,debug,test:
+[2015-12-03 10:28:42-0.28665100 1449134922,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:28:42-0.28672600 1449134922,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:30:21-0.03875700 1449135021,stefi ,debug,test:
+[2015-12-03 10:30:21-0.03886000 1449135021,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:30:21-0.06772300 1449135021,stefi ,debug,POST:a:1:{s:7:"thefile";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpk1vh85";s:5:"error";i:0;s:4:"size";i:10080903;}}
+[2015-12-03 10:31:09-0.42241900 1449135069,stefi ,debug,test:
+[2015-12-03 10:31:09-0.42257100 1449135069,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:31:09-0.42263100 1449135069,stefi ,debug,FILES:a:1:{s:7:"thefile";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpTvrlli";s:5:"error";i:0;s:4:"size";i:10080903;}}
+[2015-12-03 10:33:50-0.52284800 1449135230,stefi ,debug,test:
+[2015-12-03 10:33:50-0.52295900 1449135230,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:33:50-0.52301500 1449135230,stefi ,debug,FILES:a:1:{s:7:"thefile";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phplA1Pnu";s:5:"error";i:0;s:4:"size";i:10080903;}}
+[2015-12-03 10:34:23-0.99268400 1449135263,stefi ,debug,test:
+[2015-12-03 10:34:23-0.99280000 1449135263,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:34:23-0.99285700 1449135263,stefi ,debug,FILES:a:1:{s:7:"thefile";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpjC4IIq";s:5:"error";i:0;s:4:"size";i:10080903;}}
+[2015-12-03 10:34:56-0.09038500 1449135296,stefi ,debug,test:
+[2015-12-03 10:34:56-0.09047600 1449135296,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:34:56-0.09052800 1449135296,stefi ,debug,FILES:a:0:{}
+[2015-12-03 10:37:09-0.35605100 1449135429,stefi ,debug,test:
+[2015-12-03 10:37:09-0.35613600 1449135429,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:37:09-0.35619200 1449135429,stefi ,debug,FILES:a:1:{s:7:"thefile";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpGMyj5v";s:5:"error";i:0;s:4:"size";i:9907925;}}
+[2015-12-03 10:37:09-0.35626400 1449135429,stefi ,debug,failed to copy 
+[2015-12-03 10:38:32-0.35383000 1449135512,stefi ,debug,test:
+[2015-12-03 10:38:32-0.35391400 1449135512,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:38:32-0.35397100 1449135512,stefi ,debug,FILES:a:1:{s:7:"thefile";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/php0BjtuF";s:5:"error";i:0;s:4:"size";i:9907925;}}
+[2015-12-03 10:38:32-0.35404400 1449135512,stefi ,debug,failed to copy 
+[2015-12-03 10:39:13-0.52453300 1449135553,stefi ,debug,test:
+[2015-12-03 10:39:13-0.52465800 1449135553,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:39:13-0.52471600 1449135553,stefi ,debug,FILES:a:1:{s:7:"thefile";a:5:{s:4:"name";s:15:"26052011357.jpg";s:4:"type";s:10:"image/jpeg";s:8:"tmp_name";s:14:"/tmp/phpNQsNng";s:5:"error";i:0;s:4:"size";i:1562865;}}
+[2015-12-03 10:39:13-0.52478900 1449135553,stefi ,debug,failed to copy 
+[2015-12-03 10:40:09-0.62569500 1449135609,stefi ,debug,test:
+[2015-12-03 10:40:09-0.62577200 1449135609,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:40:09-0.62582600 1449135609,stefi ,debug,FILES:a:1:{s:7:"thefile";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.jpg";s:4:"type";s:10:"image/jpeg";s:8:"tmp_name";s:14:"/tmp/phpPTfDcP";s:5:"error";i:0;s:4:"size";i:786584;}}
+[2015-12-03 10:40:09-0.62589800 1449135609,stefi ,debug,failed to copy 
+[2015-12-03 10:40:19-0.29203900 1449135619,stefi ,debug,test:
+[2015-12-03 10:40:19-0.29212700 1449135619,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:40:19-0.29218900 1449135619,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.jpg";s:4:"type";s:10:"image/jpeg";s:8:"tmp_name";s:14:"/tmp/phpnVSgMR";s:5:"error";i:0;s:4:"size";i:786584;}}
+[2015-12-03 10:40:19-0.29341300 1449135619,stefi ,debug,success to copy 
+[2015-12-03 10:41:10-0.23163200 1449135670,stefi ,debug,test:
+[2015-12-03 10:41:10-0.23170300 1449135670,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:41:10-0.23175300 1449135670,stefi ,debug,FILES:a:0:{}
+[2015-12-03 10:41:10-0.23181700 1449135670,stefi ,debug,failed to copy 
+[2015-12-03 10:41:40-0.99233500 1449135700,stefi ,debug,test:
+[2015-12-03 10:41:40-0.99241600 1449135700,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:41:40-0.99246900 1449135700,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpxighud";s:5:"error";i:0;s:4:"size";i:10045226;}}
+[2015-12-03 10:41:41-0.00680400 1449135701,stefi ,debug,success to copy 
+[2015-12-03 10:44:17-0.91215100 1449135857,stefi ,debug,test:
+[2015-12-03 10:44:17-0.91223100 1449135857,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:44:17-0.91228500 1449135857,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpdZZUAw";s:5:"error";i:0;s:4:"size";i:6122059;}}
+[2015-12-03 10:44:17-0.92448000 1449135857,stefi ,debug,success to copy 
+[2015-12-03 10:50:19-0.14056800 1449136219,stefi ,debug,test:
+[2015-12-03 10:50:19-0.14064700 1449136219,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:50:19-0.14070100 1449136219,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:58:"23082011479erge rg erg erg erg erg erg erg er erg erg.jpeg";s:4:"type";s:10:"image/jpeg";s:8:"tmp_name";s:14:"/tmp/phpwLF3yf";s:5:"error";i:0;s:4:"size";i:786584;}}
+[2015-12-03 10:50:19-0.14189700 1449136219,stefi ,debug,success to copy 
+[2015-12-03 10:54:19-0.42572800 1449136459,stefi ,debug,test:
+[2015-12-03 10:54:19-0.42580400 1449136459,stefi ,debug,POST:a:0:{}
+[2015-12-03 10:54:19-0.42585700 1449136459,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:15:"13052011332.png";s:4:"type";s:24:"application/octet-stream";s:8:"tmp_name";s:14:"/tmp/phpwNQyfp";s:5:"error";i:0;s:4:"size";i:87056;}}
+[2015-12-03 10:54:19-0.42607500 1449136459,stefi ,debug,success to copy 
+[2015-12-03 12:57:11-0.39390300 1449143831,stefi ,debug,test:
+[2015-12-03 12:57:11-0.39398600 1449143831,stefi ,debug,POST:a:0:{}
+[2015-12-03 12:57:11-0.39404100 1449143831,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpSPM381";s:5:"error";i:0;s:4:"size";i:201317;}}
+[2015-12-03 12:57:11-0.39438900 1449143831,stefi ,debug,success to copy 
+[2015-12-03 12:58:58-0.27597800 1449143938,stefi ,debug,test:
+[2015-12-03 12:58:58-0.27605600 1449143938,stefi ,debug,POST:a:0:{}
+[2015-12-03 12:58:58-0.27611000 1449143938,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpefTJpd";s:5:"error";i:0;s:4:"size";i:141634;}}
+[2015-12-03 12:58:58-0.27658300 1449143938,stefi ,debug,success to copy 
+[2015-12-03 13:13:12-0.39674000 1449144792,stefi ,debug,test:
+[2015-12-03 13:13:12-0.39681700 1449144792,stefi ,debug,POST:a:0:{}
+[2015-12-03 13:13:12-0.39687000 1449144792,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpBZ47vA";s:5:"error";i:0;s:4:"size";i:217187;}}
+[2015-12-03 13:13:12-0.39734500 1449144792,stefi ,debug,success to copy 
+[2015-12-03 13:13:46-0.21074100 1449144826,stefi ,debug,test:
+[2015-12-03 13:13:46-0.21085200 1449144826,stefi ,debug,POST:a:0:{}
+[2015-12-03 13:13:46-0.21090700 1449144826,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phppWcAO4";s:5:"error";i:0;s:4:"size";i:211884;}}
+[2015-12-03 13:13:46-0.21189100 1449144826,stefi ,debug,success to copy 
+[2015-12-03 13:49:10-0.21757000 1449146950,stefi ,debug,test:
+[2015-12-03 13:49:10-0.21767900 1449146950,stefi ,debug,POST:a:0:{}
+[2015-12-03 13:49:10-0.21772800 1449146950,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:15:"13052011335.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpnnsm9q";s:5:"error";i:0;s:4:"size";i:317652;}}
+[2015-12-03 13:49:10-0.21832300 1449146950,stefi ,debug,success to copy 
+[2015-12-03 13:52:10-0.62448900 1449147130, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;test:
+[2015-12-03 13:52:10-0.62461400 1449147130, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;POST:a:0:{}
+[2015-12-03 13:52:10-0.62466600 1449147130, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:31:"0412-starbucks-cup-mdn (2).jpeg";s:4:"type";s:10:"image/jpeg";s:8:"tmp_name";s:14:"/tmp/phpCqdYjo";s:5:"error";i:0;s:4:"size";i:21884;}}
+[2015-12-03 13:52:10-0.62482800 1449147130, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;success to copy 
+[2015-12-03 13:53:07-0.07698000 1449147187, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;test:
+[2015-12-03 13:53:07-0.07710300 1449147187, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;POST:a:0:{}
+[2015-12-03 13:53:07-0.07715400 1449147187, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:30:"0412-starbucks-cup-mdn (2).png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpVIYq4H";s:5:"error";i:0;s:4:"size";i:61690;}}
+[2015-12-03 13:53:07-0.07737800 1449147187, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;success to copy 
+[2015-12-03 13:53:33-0.59993800 1449147213, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;test:
+[2015-12-03 13:53:33-0.60006200 1449147213, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;POST:a:0:{}
+[2015-12-03 13:53:33-0.60011400 1449147213, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:30:"0412-starbucks-cup-mdn (2).png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpdPLLuW";s:5:"error";i:0;s:4:"size";i:13597373;}}
+[2015-12-03 13:53:33-0.62163000 1449147213, 172.30.30.135 ,debug,/aa-test/picEdit-master/dist/upload.php qs:;success to copy 
+[2015-12-07 14:42:07-0.52157400 1449495727,stefi ,debug,test:
+[2015-12-07 14:42:07-0.52165600 1449495727,stefi ,debug,POST:a:0:{}
+[2015-12-07 14:42:07-0.52170300 1449495727,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpFy0VXX";s:5:"error";i:0;s:4:"size";i:47616;}}
+[2015-12-07 14:42:07-0.52187100 1449495727,stefi ,debug,success to copy 
+[2015-12-07 14:43:15-0.49777500 1449495795,stefi ,debug,test:
+[2015-12-07 14:43:15-0.49790100 1449495795,stefi ,debug,POST:a:0:{}
+[2015-12-07 14:43:15-0.49794800 1449495795,stefi ,debug,FILES:a:1:{s:9:"own_image";a:5:{s:4:"name";s:57:"23082011479erge rg erg erg erg erg erg erg er erg erg.png";s:4:"type";s:9:"image/png";s:8:"tmp_name";s:14:"/tmp/phpp1Lvo4";s:5:"error";i:0;s:4:"size";i:47616;}}
+[2015-12-07 14:43:15-0.49813800 1449495795,stefi ,debug,success to copy 

@@ -1,0 +1,107 @@
+/* X51 admin */
+#admin_login {
+	margin-top: 150px;
+	text-align: center;
+}
+#admin {
+	margin: 100px;
+}
+#admin_login button {
+	float: none;
+	margin: 0 auto;
+}
+ul#menu_admin {
+	font-size: 130%;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	width: 350px;
+}
+
+ul#menu_admin li {
+	margin: 1px 0 ;
+	padding: 0;
+}
+ul#menu_admin li a {
+	display: block;
+	text-decoration: none;
+	background: #454545;
+	color: #ffffff;
+	padding: 5px 8px;
+}
+ul#menu_admin li.current a:hover,
+ul#menu_admin li.current a {
+	background: #ffc000;
+}	
+ul#menu_admin li a:hover {
+	background: #000000;
+}
+
+
+table.prehled_table {
+	margin-bottom: 2em;
+	font-size: 120%;
+	border-collapse: collapse;
+}	
+table.prehled_table td,
+table.prehled_table th {
+	border: 1px solid darkgreen;
+	padding: 5px 10px;
+}
+table.prehled_table span {
+	font-size: 80%;
+}
+#slev_kog_generator label {
+	display: inline-block;
+	width: 90px;
+	font-size: 120%;
+	font-weight: bold;
+	margin-top: 0.8em;
+}
+button {
+	display: block;
+	float: none;
+}
+form {
+	margin: 20px 0;
+}
+h1 {
+	margin-top: 2em;
+}
+h2 {
+	margin-top: 3em;
+}
+textarea {
+	width: 750px;
+	height: 80px;
+}
+.prehled_table span {
+	display: block;
+}
+#admin .edit_fakturace {
+	text-decoration: underline;
+	cursor: pointer;
+	padding: 4px 25px 4px 4px;
+	background: url(../img/edit_pen_red.png) center right no-repeat;
+	margin-right: 10px;
+}
+#admin .edit_fakturace.done {
+	background-image: url(../img/edit_pen_green.png);
+}
+#admin .po_terminu {
+	color: red;
+}
+
+#admin .status_active {
+	background: #d1ffcb;
+}
+#admin .status_pending {
+	background: #fffd65;
+}
+#admin .status_end {
+	background: #000000;
+	background: #a9a9a9;
+}
+#admin .status_refund {
+	background: #ffd4d4;
+}

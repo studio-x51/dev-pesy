@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+
+<link rel="stylesheet" type="text/css" href="css/picedit.css" />
+
+</head>
+<body>
+
+<div style="margin:10% auto 0 auto; display: table;">
+
+<form action="upload.php" method="post" enctype="multipart/form-data" id="xid">
+
+	<input type="file" name="own_image" id="thebox">
+
+	<div style="margin-top:30px; text-align: center;">
+		<button type="submit">Submit</button>
+    </div>
+
+</form>
+
+</div>
+
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/picedit.js"></script>
+<script type="text/javascript">
+/*	$(function() {
+		$('#thebox').picEdit();
+	});
+*/	
+	$('#thebox').picEdit({
+	  formSubmitted: function(response){
+		 alert('Form submitted!');
+	  }
+});
+
+</script>
+
+</body>
+</html>

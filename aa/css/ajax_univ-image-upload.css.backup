@@ -1,0 +1,108 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+	color:#666666;
+}
+#upload-wrapper {
+	width: 100%;
+}
+#upload-wrapper h3 {
+	padding: 0px 0px 10px 0px;
+	margin: 0px 0px 20px 0px;
+	margin-top: -30px;
+	border-bottom: 1px dotted #DDD;
+}
+#upload-wrapper input[type=file] {
+	border: 1px solid #DDD;
+	padding: 6px;
+	background: #FFF;
+	border-radius: 5px;
+}
+#upload-wrapper #submit-btn {
+	border: none;
+	padding: 10px;
+	background: #61BAE4;
+	border-radius: 5px;
+	color: #FFF;
+}
+.output_ajax_upload {
+	position: absolute;
+	left: 50%;
+	margin-left: -170px;
+	width: 300px; 
+	color: #ffffff;
+	font-size: 130%;
+	font-weight: bold;
+	text-align: center;
+	z-index: 25;
+	background: #888888;
+	padding: 10px 15px;
+	display: none;
+}
+
+.file-wrapper {
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  top: 10px;
+}
+/* dashboard og */
+#dashboard #f_set_fb_og .file-wrapper {
+	float: none;
+	width: 100%;
+	margin-bottom: 15px;
+}
+#dashboard #f_set_fb_og .file-wrapper img {
+	max-width: 100%;
+}
+/* /dashboard og */
+
+.file-wrapper input {
+  cursor: pointer;
+  font-size: 100px;
+  height: 100%;
+  filter: alpha(opacity=1);
+  -moz-opacity: 0.01;
+  opacity: 0.01;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+/* dashboard og */
+#dashboard #f_set_fb_og input {
+	width: 100%;
+	border: 0;
+	margin-bottom: 5px;
+	padding: 10px 8px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	font-size: 100%;
+}
+/* /dashboard og */
+.file-wrapper .button {
+  cursor: pointer;
+  display: block;
+  width: 55px;
+  height: 55px;
+  text-transform: uppercase;
+  background: url(../2/img/nova_cena_small.png) no-repeat;
+}
+/* /dashboard og */
+#dashboard #f_set_fb_og .file-wrapper .button {
+	width: 100%;
+	height: auto;
+}
+
+.file-wrapper .button.hover {
+/*	background-position: 0 -57px; */
+}
+#uploadFileName {
+	position: relative;
+	color: #ffffff;
+	top: 25px;
+}

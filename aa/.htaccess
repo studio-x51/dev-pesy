@@ -1,0 +1,16 @@
+RewriteEngine on
+
+#RewriteBase /aa/
+
+# fake url pro remarketing
+# signupcomplete pro nove uzivatele
+# dashboard pro stare uzivatele
+RewriteRule ^signupcomplete/? .?sign=signupcomplete [L,QSA]
+RewriteRule ^dashboard/? .?sign=dashboard [L,QSA]
+
+#RewriteRule ^(\d+)/?([^\/]+)/?$ $1/$2?aplikace_typ_id_control=$1&%{QUERY_STRING}
+RewriteRule ^(\d+)/?([^\/]+)/?$ $1/$2?aplikace_typ_id_control=$1 [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME}\.php -f 
+RewriteRule ^(.*)$ $1.php

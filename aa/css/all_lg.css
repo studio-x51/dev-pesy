@@ -1,0 +1,22 @@
+#col_left1 .set_what {
+	background-image: url(../img/<?=get_lang()?>/icon_tema.png);
+}	
+#col_left1 #set_prvky {
+	background-image: url(../img/<?=get_lang()?>/icon_prvky.png);
+}	
+#PopVyhra div#pravdepodobnost_nejvyssi {
+	background-image: url(../img/<?=get_lang()?>/pravdepodobnost_nejvyssi.png);
+}	
+#PopVyhra div#pravdepodobnost_vysoka {
+	background-image: url(../img/<?=get_lang()?>/pravdepodobnost_vysoka.png);
+}	
+#PopVyhra div#pravdepodobnost_nizka {
+	background-image: url(../img/<?=get_lang()?>/pravdepodobnost_nizka.png);
+}	
+#PopVyhra div#pravdepodobnost_nejnizsi {
+	background-image: url(../img/<?=get_lang()?>/pravdepodobnost_nejnizsi.png);
+}
+#cont_test_app_action {
+	background-image: url(../img/<?=get_lang()?>/action1.png);
+}
+

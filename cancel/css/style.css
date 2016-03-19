@@ -1,0 +1,118 @@
+/*
+ *
+ * Project: SS / cancel
+ * Update:  8/3/2016
+ *
+*/
+
+
+/* ----------> reset CSS */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0; padding: 0; border: 0; font-size: 100%; /*font: inherit;*/ vertical-align: baseline; background: transparent
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block } /* HTML5 display-role reset for older browsers */
+body { line-height: 1 }
+ol, ul { list-style: none }
+blockquote, q { quotes: none }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none }
+table { border-collapse: collapse; border-spacing: 0 }
+:focus { outline: none }
+
+.clearfix:before, .clearfix:after { content: ""; display: table; line-height: 0 }
+.clearfix:after { clear:both }
+
+
+
+/* ----------> base CSS */
+
+body { font: 100%/1.4 "Open Sans", "Arial CE", arial, "Helvetica CE", helvetica, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale }
+body { color: #000; font-weight: 400; text-align: center; background-color: #fff }
+h1, h2, h3, h4, h5, h6 { color: #3c4347; font-weight: 700; line-height: normal; letter-spacing: -1px; text-align: center }
+h1 { font-size: 300%; clear: both; margin: 0 0 0.7em 0; line-height: 1.1; letter-spacing: -1px }
+h2 { font-size: 200%; font-weight: 700; margin: 0 0 1em 0; line-height: 1.2 }
+h3 { font-size: 160%; font-weight: 400; margin: 0 0 1em 0; line-height: 1.2 }
+h4 { font-size: 120%; margin: 0 0 0.5em 0 }
+input, select, textarea { font: 100% Roboto, "Arial CE", arial, "Helvetica CE", helvetica, sans-serif }
+a { color: #00A1CB; outline: none; -o-transition: .4s; -webkit-transition: .4s; transition: .4s }
+a:link { color: #00A1CB }
+a:hover { color: #61ae24; text-decoration: none }
+p { margin: 2em 0; line-height: 1.4 }
+ul, ol { margin: 1em auto 2.7em auto }
+small { font-size: 70% }
+/* Google webfont */
+em, i { font-style: italic }
+strong, b { font-weight: bold }
+sup { vertical-align: super }
+sub { vertical-align: sub }
+
+
+
+/* ----------> default CLASS */
+
+.tal { text-align: left }
+.tac { text-align: center }
+.tar { text-align: right }
+.vat { vertical-align: top }
+.vam { vertical-align: middle }
+.fl { float: left }
+.fr { float: right }
+.fli { float: left; margin: 0 1.3em 1em 0 }
+.fri { float: right; margin: 0 0 1em 1.3em }
+.hidden { display: none }
+.small { font-size: 70% }
+
+
+
+/* ----------> project LAYOUT */
+
+#main { width: 100% }
+#header { width: 100%; height: 56px; position: fixed; left: 0; top: 0; z-index: 99; background-color: #00a1cb; text-align: center }
+#footer { padding: 70px 0; background-color: #f0f5f7 }
+
+.content { width: 1100px; margin: 130px auto 70px; text-align: left }
+
+
+
+/* ----------> project CSS */
+
+#logo, #logo span { display: inline-block; margin: 0; position: relative; left: 0; top: 0; width: 180px; height: 56px; overflow: hidden; text-indent: -999em }
+#logo span { position: absolute; left: 0; top: 0; background: transparent url(http://www.socialsprinters.cz/wp/wp-content/themes/socialsprinters_cz/img/logo.png) no-repeat 0 0 }
+
+.col { width: 47%; padding: 40px 0 0 }
+.col.fr { width: 40% }
+.col img { margin: 0 auto; display: block }
+
+li { padding: 8px 0 8px 40px; background: transparent url(../img/bullet2.png) no-repeat 0 5px }
+.bullet2 li { background: transparent url(../img/bullet1.png) no-repeat 0 5px }
+
+label sup { color: #df0000; position: relative; top: .4em }
+
+form { margin: 0 }
+form p { margin: 0 0 .7em }
+form h3 { margin: 1.5em 0 }
+form input, form select, form textarea { width: 100%; border: 1px solid #ddd; margin: .2em 0 0; height: 36px; padding: 0 12px; -webkit-border-radius: 4px; border-radius: 4px; -webkit-box-sizing: border-box; box-sizing: border-box }
+form textarea { height: 120px; padding: 12px }
+form input:focus, form textarea:focus { background-color: #f2f2f2 }
+form .error { border: 1px solid #df0000 }
+form small { color: #df0000; display: none }
+
+.btn { cursor: pointer; display: inline-block; border: 0; padding: 20px 45px; color: #fff !important; font-size: 140%; font-weight: 700; letter-spacing: -1px; text-decoration: none; position: relative; text-align: center; background-color: #4dcc43; -o-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; -o-transition: .4s; -webkit-transition: .4s; transition: .4s }
+.btn:hover { background-color: #45b73c }
+
+
+
+@media only screen and (max-width: 1024px) {
+
+	body { font-size: 100% }
+	html { -webkit-text-size-adjust: none }
+	img { max-width: 100%; height: auto; /*width: auto\9;*/ /* ie8 */ }
+	input, textarea { width: auto; -o-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box }
+	input[type="submit"] { -webkit-appearance: none }
+
+	.content { width: 90%; margin: 130px 5% 70px }
+	.col { width: 100% !important; float: none }
+
+  h1 { font-size: 200% }
+
+}

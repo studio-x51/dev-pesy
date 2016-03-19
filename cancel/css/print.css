@@ -1,0 +1,19 @@
+body { font: 11pt/1 times, serif; background: #fff; color: #000; margin: 0; padding: 0 }
+#main-wrapper { display: block; }
+#main { width: 100%; margin: 0; text-align: justify }
+#content { float: none; width: auto; padding: 0 }
+
+h1, h2, h3, h4, h5, h6 { font-family: verdana, arial, sans-serif !important; text-align: left !important; page-break-after: avoid; page-break-inside: avoid }
+
+#share, #comments, #crp_related, .youtube, iframe, #sidebar, #header, #footer, hr, #navigace, .no-print, aside { display: none !important }
+
+blockquote, table, pre { page-break-inside:avoid }
+ul, ol, dl  { page-break-before:avoid }
+img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+.fr { float: right }
+.fl { float: left }
+img { page-break-inside:avoid; page-break-after:avoid; }
+
+img.hidden, #print-info { display: block }
+#print-info { margin: 2em 0 0 0; padding: 1.2em; border: 3px solid #666 }
+#print-info p { margin: 0 0 1em 0 }

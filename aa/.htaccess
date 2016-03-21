@@ -1,6 +1,7 @@
 RewriteEngine on
 
 #RewriteBase /aa/
+#RewriteBase /dev-pesy/aa/  on server
 
 # fake url pro remarketing
 # signupcomplete pro nove uzivatele

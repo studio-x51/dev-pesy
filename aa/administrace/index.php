@@ -1,7 +1,7 @@
 <?
 if($_POST['heslo']) {
 	session_start();
-	$heslo = $_POST['heslo'];
+	$heslo = trim($_POST['heslo']);
 	if ($heslo=="aaa123") {
 		$_SESSION["access_admin_ss"] = true;
 		header("location:./?action=logon");
@@ -23,7 +23,6 @@ if(!$_SESSION["access_admin_ss"]) {
 		<button type="submit"><?=txt("setting-button_vstup")?></button>
 		</form>
 	</div>	
-
 <?
 	require_once("../inc/footer.php");
 	exit;
@@ -31,13 +30,9 @@ if(!$_SESSION["access_admin_ss"]) {
 	require_once("../inc/header.php");
 ?>
 <link href="../css/admin.css" rel="stylesheet" media="all" type="text/css">
-
 <div id="admin">
   <? menu_admin();?>
 </div><!--/id="admin"-->
-
-
-
 <?
 	require_once("../inc/footer.php");
 }

@@ -205,7 +205,7 @@ function statistika_celkovy_prehled()
 	$table .=  "</tr>";
 	ob_start();
 ?>		<tr>
-			<th></th>
+			<th>#</th>
 			<th>Jméno</th>
 			<th>FB ID</th>
 			<th>Částka</th>

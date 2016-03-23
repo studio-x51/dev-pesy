@@ -1,13 +1,13 @@
 <?php 
 $screen_debug = false;
-$err = (!$screen_debug) ? 0 : 'E_ALL';
+$err = (!$screen_debug) ? 0 : E_ALL;
 session_start();
 error_reporting($err);
-  
-include_once 'inc/form.class.php';
+
+include_once 'inc/cancelForm.class.php';
 /*  instance tridy Form, 
  *  drzeni hodnoty formulare, pokud nefunguje validace pomoci bootstrap a js */
-$frm = new Form();
+$frm = new cancelForm();
 /* submit formulare - otestovani hodnot, vypsani chyby - hlavne pokud je vypnuty JS*/
 $frm->sendCancelForm($_POST);
 /* pole hodnot pro select odpovedi */

@@ -63,7 +63,8 @@ class cancelForm {
     $query = "SELECT * 
                 FROM  ".$this->tbl_owner."
                WHERE typ = 'premium'
-                 AND email = '".$email."' OR email_contact = '".$email."'
+                 AND ((email = '".$email."' OR email_contact = '".$email."'))
+                 AND dt_request_cancel IS NULL
                  AND status = 'active'
              ";
 		$this->db->query($query, $result_user);
@@ -110,7 +111,7 @@ class cancelForm {
         // update owner column DT_REQUEST_CANCEL, CANCEL_REASON, CANCEL_NOTICE
         if ($this->setOwnerCancelRequest($fb_id, $cancel_reason, $cancel_notice)) {
           $se = new SmartEmailing();
-          if ($se->createCancelAction($email) === 'SUCCESS') {
+          if ($se->createCancelAction($email) == true) {
             $_SESSION['cancel_send_success'] = true;
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
             header('Location: '.$protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);

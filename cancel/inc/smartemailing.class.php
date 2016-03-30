@@ -78,21 +78,23 @@ class SmartEmailing {
       echo "Chyba v zasilani XML requestu!";
     } else {
       header ("Content-Type:text/xml");
-      $this->v($result);
+      //$this->v($result);
       /** @noinspection PhpUsageOfSilenceOperatorInspection */
       $xml_doc = @simplexml_load_string($result); // intentionally @
       if (!$xml_doc) {
         //echo "ERR in request" . PHP_EOL;
         return "ERR in request";
-        $this->v($result);
+        //$this->v($result);
       }
       //echo PHP_EOL . $result . PHP_EOL . '------------------' . PHP_EOL;
       //echo 'Status is ' . $xml_doc->status . PHP_EOL;
       if ($xml_doc->status == 'SUCCESS') {
         //print_r($xml_doc->data);
-        return "SUCCESS";
+        //return "SUCCESS";
+        return true;			
       } else {
-        return "ERROR";
+        return false;
+        //return "ERROR";
         //log - SE ERROR
         //echo $xml_doc->errormessage;
       }

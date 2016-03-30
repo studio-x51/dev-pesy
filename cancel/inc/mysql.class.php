@@ -151,10 +151,11 @@ class mysql {
 	 *	@author Pesy	
 	 */
 	public function fetchArray($res) {
-    if(!empty($res))
+    if(!empty($res)) {
       return mysql_fetch_array($res);
-    else
+    } else {
       return '';
+    }
 	}
 
 	/**
@@ -166,10 +167,11 @@ class mysql {
 	*	@author Pesy
 	*/
 	public function fetchArrayResult($array, $return_in = MYSQL_ASSOC) {
-		if (!empty($array))
-			return mysql_fetch_array($array, $return_in);
-		else
+		if (!empty($array)) {
+      return mysql_fetch_array($array, $return_in);
+    } else {
 			return '';
+    }
 	}
 
 	/** 

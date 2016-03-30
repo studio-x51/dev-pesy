@@ -4,19 +4,27 @@ $err = (!$screen_debug) ? 0 : E_ALL;
 session_start();
 error_reporting($err);
 
+// definition of premium_cancel_reason
+include_once '../aa/inc/global_parameters.php'; 
 include_once 'inc/cancelForm.class.php';
+
+/* pole hodnot pro select odpovedi */
+$answer_arr = $CONF_XTRA["premium_cancel_reason"]['cs'];
+
 /*  instance tridy Form, 
  *  drzeni hodnoty formulare, pokud nefunguje validace pomoci bootstrap a js */
 $frm = new cancelForm();
+
 /* submit formulare - otestovani hodnot, vypsani chyby - hlavne pokud je vypnuty JS*/
 $frm->sendCancelForm($_POST);
-/* pole hodnot pro select odpovedi */
-$answer_arr = array('1'=>'Tuto službu nemám kde využít, není pro mě',
-                    '2'=>'Momentálně nemám čas se službou zabývat',
-                    '3'=>'Měsíční poplatek je vysoký',
-                    '4'=>'Celkově mi služba nevyhovuje',
-                    '5'=>'Ani jedna z dostupných aplikací mi nevyhovuje',
-                    '6'=>'Efektivita aplikací nesplnila moje očekávání');  
+
+/*SmartEmailing API*/
+//https://www.smartemailing.cz/api/
+
+/*
+$CONF_XTRA["smartemailing_token"] = 'TApH2gLh2cKKf00ehlcAFPMHZ6w1OpjocvYXCeDO';
+$CONF_XTRA["smartemailing_username"] = 'tomas.vans@seznam.cz';
+*/
 ?>
 <!DOCTYPE html>
 <html lang="cs-CZ">

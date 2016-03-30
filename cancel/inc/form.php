@@ -18,10 +18,10 @@
 		<h3>Napište nám, proč rušíte své členství. Vyberte odpověď z následující nabídky.</h3>
 		<p>
       <?php if(is_array($answer_arr)&&(count($answer_arr)>0)) {?>
-      <select name="cancel_answer">
+      <select name="cancel_reason">
         <?php 
           foreach($answer_arr as $keya => $a) {
-            $sel_a = ($_POST['cancel_answer'] == intval($keya)) ? 'selected="selected"' : '';
+            $sel_a = ($_POST['cancel_reason'] == intval($keya)) ? 'selected="selected"' : '';
         ?>
           <option <?php echo $sel_a;?> value="<?php echo intval($keya)?>"><?php echo strval($a)?></option>
         <?php }?>

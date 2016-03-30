@@ -14,21 +14,34 @@ require_once("../inc/header.php");
 <div id="admin">
 <?php menu_admin();?>
   <h1>Přehled žádostí</h1>
-<?php if (is_array(getUsers())&&(count(getUsers())>0)) {?>    
+<?php if (is_array(getCancelRequests())&&(count(getCancelRequests())>0)) {?>    
   <table class="prehled_table">
 		<tr>
       <th>#</th>
-			<th>FB_id</th>
+      <th>Datum žádosti</th>
+			<th>FB ID</th>
 			<th>Uživatel</th>
+      <th>Email</th>
+      <th>Důvod</th>
+      <th>Poznámka</th>
+      <th>Akce</th>
 		</tr>
     <?php 
     $i=1; 
-    foreach (getUsers() as $fb => $title) {
+    foreach (getCancelRequests() as $key => $req) {
+      $email = ($req['email']!='' && $req['email']!='undefined') ? $req['email'] : $req['email_contact'];
+      $notice = (!$req['cancel_notice']) ? 'x' : $req['cancel_notice'];
+      $reason = ($CONF_XTRA["premium_cancel_reason"]['cs'][$req['cancel_reason']]);
     ?>
       <tr>
         <td><?php echo $i;?></td>
-        <td><?php echo htmlspecialchars_decode($fb)?></td>
-        <td><?php echo htmlspecialchars_decode($title)?></td>
+        <td><?php echo htmlspecialchars_decode($req['dt_formatted'])?></td>
+        <td><?php echo htmlspecialchars_decode($key)?></td>
+        <td><?php echo htmlspecialchars_decode($req['fullName'])?></td>
+        <td><?php echo htmlspecialchars_decode($email)?></td>
+        <td><?php echo htmlspecialchars_decode($reason)?></td>
+        <td><?php echo htmlspecialchars_decode($notice)?></td>
+        <td>GoPay akce</td>
       </tr>    
     <?php 
     $i++; 
@@ -39,14 +52,32 @@ require_once("../inc/header.php");
 <?php require_once("../inc/footer.php"); ?>
 
 <?php
-function getUsers() {
+/* return cancel request - owner*/
+function getCancelRequests() {
+$query_request = "SELECT O.*, CONCAT(O.prijmeni, ' ', O.jmeno) AS fullName,
+                         DATE_FORMAT(O.dt_request_cancel, '%d.%m.%Y %H:%i') AS dt_formatted
+                    FROM owner AS O
+                   WHERE O.dt_request_cancel IS NOT NULL
+                     AND typ = 'premium'
+                ORDER BY O.dt_request_cancel DESC
+                ";
+	dbQuery($query_request);
+	while($row = dbArrTiny()) {
+		$members[$row["fb_id"]]= $row;
+  }
+  return $members;
+}  
+//print_r(getCancelRequests());
+
+
+/*function getUsers() {
 	// 1. hash dat odberatele
 	dbQuery("SELECT nazev, fb_id FROM odberatel");
 	while($row = dbArr()) {
 		$hash_odb[$row["fb_id"]] = $row["nazev"];
   }
   return $hash_odb;
-}
+}*/
 
 //------------------------------------------------------------------------------
 
@@ -62,7 +93,7 @@ $query = "SELECT p.zalozeno, gopay_id, amount, currency, CONCAT(prijmeni, ' ', j
         ORDER BY p.zalozeno";*/
 
 // nactu vsechny najitele, kteru maji zaplacene premium! - PESY
-$query_m = "SELECT P.zalozeno, P.gopay_id, P.amount, P.currency, CONCAT(O.prijmeni, ' ', O.jmeno) AS fullName, K.kod, O.fb_id, O.status AS statusOwner
+/*$query_m = "SELECT P.zalozeno, P.gopay_id, P.amount, P.currency, CONCAT(O.prijmeni, ' ', O.jmeno) AS fullName, K.kod, O.fb_id, O.status AS statusOwner
               FROM owner AS O
               JOIN slev_kody AS K ON K.owner_fb_id = O.fb_id
               JOIN platba AS P ON P.spec_slev_kod = K.kod
@@ -77,7 +108,7 @@ $query_m = "SELECT P.zalozeno, P.gopay_id, P.amount, P.currency, CONCAT(O.prijme
 	dbQuery($query_m);
 	while($row = dbArrTiny()) {
 		$members[$row["fb_id"]]= $row;
-  }
+  }*/
   
   /*echo count($members);
   print_r($members);*/
@@ -97,7 +128,7 @@ $query = "SELECT p.zalozeno, UNIX_TIMESTAMP(p.zalozeno) utime, gopay_id, gopay_p
   
   
 // nactu vsechny platby! - PESY
-$query_p = "SELECT P.zalozeno, UNIX_TIMESTAMP(P.zalozeno) AS utime, P.gopay_id, P.gopay_parent_id, P.amount, P.currency, K.kod, O.fb_id
+/*$query_p = "SELECT P.zalozeno, UNIX_TIMESTAMP(P.zalozeno) AS utime, P.gopay_id, P.gopay_parent_id, P.amount, P.currency, K.kod, O.fb_id
               FROM owner AS O
               JOIN slev_kody AS K ON K.owner_fb_id = O.fb_id
               JOIN platba AS P ON P.spec_slev_kod = K.kod
@@ -109,8 +140,7 @@ $query_p = "SELECT P.zalozeno, UNIX_TIMESTAMP(P.zalozeno) AS utime, P.gopay_id, 
   dbQuery($query_p);
 	while($row = dbArrTiny()) {
 		$members_platby[$row["fb_id"]][] = $row;
-	}  
+	}*/  
   
   /*echo count($members_platby);
   print_r($members_platby);*/
-?>

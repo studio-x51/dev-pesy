@@ -1,5 +1,6 @@
 <?php
 
+//include_once ('lib.php');
 include_once ('database.php');
 include_once ('mysql.class.php');
 
@@ -36,10 +37,10 @@ class cancelForm {
    */
   public function toSafeData($string) {
     if (get_magic_quotes_gpc()) {
-      $string = stripslashes($string);
+      $string_conv = stripslashes($string);
     }
-    $string = mysql_real_escape_string(htmlspecialchars($string));
-    return trim($string);
+    $string_conv = mysql_real_escape_string(htmlspecialchars($string));
+    return trim($string_conv);
   }    
   
 	/**
@@ -87,6 +88,8 @@ class cancelForm {
     $firstname = trim($vals['cancel_firstname']);
     $lastname = trim($vals['cancel_lastname']);
     $email = trim($vals['cancel_email']);
+    $cancel_reason = trim($vals['cancel_reason']);
+    $cancel_notice = trim($vals['cancel_notice']);
     $submit = $vals['cancel_send'];
     
     if (isset($submit)) {
@@ -103,8 +106,8 @@ class cancelForm {
       // set timestamp in column DT_REQUEST_CANCEL
       if ($this->getErrorMessage() == null) {
         $fb_id = strval($this->owner_data['fb_id']);
-        // update owner column DT_REQUEST_CANCEL, set CURRENT_TIMESTAMP
-        if ($this->setOwnerCancelRequest($fb_id)) {
+        // update owner column DT_REQUEST_CANCEL, CANCEL_REASON, CANCEL_NOTICE
+        if ($this->setOwnerCancelRequest($fb_id, $cancel_reason, $cancel_notice)) {
           // TODO - smartemailing
           $_SESSION['cancel_send_success'] = true;
           $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
@@ -125,12 +128,14 @@ class cancelForm {
    * @param string $fb_id primary key of owner, identification
    * @return boolean true if success
    */
-  public function setOwnerCancelRequest($fb_id) {
+  public function setOwnerCancelRequest($fb_id, $cancel_reason, $cancel_notice) {
     if ($fb_id != null) {
       $query_upd = "UPDATE ".$this->tbl_owner."
-                       SET dt_request_cancel = CURRENT_TIMESTAMP
+                       SET dt_request_cancel = CURRENT_TIMESTAMP,
+                           cancel_reason = '".intval($cancel_reason)."',
+                           cancel_notice = '".$this->toSafeData($cancel_notice)."'
                      WHERE fb_id = '".trim($fb_id)."'
-                       AND state = 'active'
+                       AND status = 'active'
                        AND typ = 'premium'
                     "; 
       $this->db->query($query_upd, $result_upd);

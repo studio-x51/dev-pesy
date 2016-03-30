@@ -5,6 +5,7 @@ $CONF_XTRA["smartmailing"]["premium"] = 69;
 $CONF_XTRA["smartmailing"]["premium_academy"] = 82;
 $CONF_XTRA["smartmailing"]["pdf26napadu"] = 91;
 $CONF_XTRA["smartmailing"]["new_user_zalozka"] = 74;
+$CONF_XTRA["smartmailing"]["premium_cancel"] = 95;
 
 $CONF_XTRA["SHORT_HOST"] = "sprinte.rs";
 $CONF_XTRA["article:author"] = "http://www.socialsprinters.cz/";
@@ -1039,4 +1040,11 @@ $CONF_XTRA["price"][8]["12M_DISCOUNT"] = "0.30"; // 20% sleva pri platbe na 9 me
 
 /* /CENY APLIKACI */
 
-?>
+/* DUVOD ZRUSENI PREMIUM CLENSTVI */
+$CONF_XTRA["premium_cancel_reason"]['cs'] = array('1'=>'Tuto službu nemám kde využít, není pro mě',
+                                                  '2'=>'Momentálně nemám čas se službou zabývat',
+                                                  '3'=>'Měsíční poplatek je vysoký',
+                                                  '4'=>'Celkově mi služba nevyhovuje',
+                                                  '5'=>'Ani jedna z dostupných aplikací mi nevyhovuje',
+                                                  '6'=>'Efektivita aplikací nesplnila moje očekávání'); 
+/* /DUVOD ZRUSENI PREMIUM CLENSTVI */

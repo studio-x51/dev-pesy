@@ -15,16 +15,10 @@ $answer_arr = $CONF_XTRA["premium_cancel_reason"]['cs'];
  *  drzeni hodnoty formulare, pokud nefunguje validace pomoci bootstrap a js */
 $frm = new cancelForm();
 
-/* submit formulare - otestovani hodnot, vypsani chyby - hlavne pokud je vypnuty JS*/
+/* - submit formulare - otestovani hodnot, vypsani chyby - hlavne pokud je vypnuty JS
+ * - presun kontaktu v ramci seznamu SE - API - https://www.smartemailing.cz/api/
+ */
 $frm->sendCancelForm($_POST);
-
-/*SmartEmailing API*/
-//https://www.smartemailing.cz/api/
-
-/*
-$CONF_XTRA["smartemailing_token"] = 'TApH2gLh2cKKf00ehlcAFPMHZ6w1OpjocvYXCeDO';
-$CONF_XTRA["smartemailing_username"] = 'tomas.vans@seznam.cz';
-*/
 ?>
 <!DOCTYPE html>
 <html lang="cs-CZ">

@@ -1,4 +1,4 @@
 - increments db - owner table, new columns
 - logger
-- SE
-- global_parameters.php - $CONF_XTRA["smartmailing"]["premium_cancel"]
+- implementace tridy SE, API
+- global_parameters.php - $CONF_XTRA["smartmailing"]["premium_cancel"], $CONF_XTRA["premium_cancel_reason"]['cs']

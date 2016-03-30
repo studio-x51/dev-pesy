@@ -3,6 +3,7 @@
 //include_once ('lib.php');
 include_once ('database.php');
 include_once ('mysql.class.php');
+include_once ('smartemailing.class.php');
 
 /**
  * Description of cancelForm class
@@ -108,11 +109,13 @@ class cancelForm {
         $fb_id = strval($this->owner_data['fb_id']);
         // update owner column DT_REQUEST_CANCEL, CANCEL_REASON, CANCEL_NOTICE
         if ($this->setOwnerCancelRequest($fb_id, $cancel_reason, $cancel_notice)) {
-          // TODO - smartemailing
-          $_SESSION['cancel_send_success'] = true;
-          $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
-          header('Location: '.$protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-          exit();          
+          $se = new SmartEmailing();
+          if ($se->createCancelAction($email) === 'SUCCESS') {
+            $_SESSION['cancel_send_success'] = true;
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
+            header('Location: '.$protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+            exit();                      
+          }
         }
       }  
     }

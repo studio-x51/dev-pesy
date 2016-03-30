@@ -1,5 +1,5 @@
 <?php
-//PRODUCTION
+// TEST-SERVER
 /*$database=array("server"=>"127.0.0.1",
                 "user"=>"socialsp",
                 "password"=>"fhahfkg",

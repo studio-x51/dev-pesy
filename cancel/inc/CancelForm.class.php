@@ -1,7 +1,5 @@
 <?php
 namespace Inc;
-include_once ('Base.class.php');
-include_once ('SmartEmailing.class.php');
 /**
  * Description of cancelForm class
  *
@@ -24,30 +22,7 @@ class CancelForm extends Base {
    * access to mysql methods via $this->db
    */
   public function __construct() {
-    $this->db = parent::makeDbConnection();
-  }
-  
-  /** Escape string, from input, insert to database etc.
-   * @param string $string value to escape
-   * @return string escaped string
-   * @author pesy petr.syrny@x51.cz
-   */
-  public function toSafeData($string) {
-    if (get_magic_quotes_gpc()) {
-      $string_conv = stripslashes($string);
-    }
-    $string_conv = mysql_real_escape_string(htmlspecialchars($string));
-    return trim($string_conv);
-  }    
-  
-	/**
-	* Keep value of form input, mainly for POST
-   * @param string $form_element - value (name) of element $_POST['']
-   * @return string value of input, only for type = 'text' || area
-	 * @author pesy petr.syrny@x51.cz
-	*/
-  public function keepValueRet($form_element) {
-    if (isset($form_element)) { return (string)$form_element; }
+    $this->db = parent::createDbConnection();
   }
   
   /**
@@ -82,7 +57,7 @@ class CancelForm extends Base {
    * Submit action for cancel form
    * - check input values, set error message, header if success
    */
-  public function sendCancelForm($vals) {
+  public function processCancelForm($vals) {
     $firstname = trim($vals['cancel_firstname']);
     $lastname = trim($vals['cancel_lastname']);
     $email = trim($vals['cancel_email']);
@@ -93,11 +68,9 @@ class CancelForm extends Base {
     if (isset($submit)) {
       if (empty($firstname)||(empty($lastname))||(empty($email))) {
         $this->errorMessage = 'Zadejte všechna pole označená <strong>*</strong>';
-      }
-      if (!empty($email)&&(!filter_var($email,FILTER_VALIDATE_EMAIL))) {
+      } elseif (!empty($email)&&(!filter_var($email,FILTER_VALIDATE_EMAIL))) {
         $this->errorMessage = 'Zadejte platnou emailovou adresu - xxxx@xxx.xx';
-      }      
-      if (!$this->ownerEmailExists($email)) {
+      } elseif (!$this->ownerEmailExists($email)) {
         $this->errorMessage = 'Vámi <strong>zadaný e-mail neznáme</strong>.<br /><br /> Zadejte prosím e-mail, který je <strong>propojený s Vaším osobním facebookovým účtem, pod kterým se přihlašujete do SocialSprinters</strong>.';
       }
       // no error - continue to process request
@@ -133,7 +106,7 @@ class CancelForm extends Base {
       $query_upd = "UPDATE ".$this->tbl_owner."
                        SET dt_request_cancel = CURRENT_TIMESTAMP,
                            cancel_reason = '".intval($cancel_reason)."',
-                           cancel_notice = '".$this->toSafeData($cancel_notice)."'
+                           cancel_notice = '".parent::toSafeData($cancel_notice)."'
                      WHERE fb_id = '".trim($fb_id)."'
                        AND status = 'active'
                        AND typ = 'premium'

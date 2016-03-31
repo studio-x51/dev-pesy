@@ -3,22 +3,27 @@ $screen_debug = false;
 $err = (!$screen_debug) ? 0 : E_ALL;
 session_start();
 error_reporting($err);
+mb_internal_encoding("UTF-8");
+
+/* autoload of classes */
+function __autoload($class_name)  {
+  require_once "".$class_name.".class.php";
+}
 
 // definition of premium_cancel_reason
 include_once '../aa/inc/global_parameters.php'; 
-include_once 'inc/CancelForm.class.php';
 
 /* pole hodnot pro select odpovedi */
 $answer_arr = $CONF_XTRA["premium_cancel_reason"]['cs'];
 
-/*  instance tridy Form, 
+/*  instance tridy Form, autoload tridy
  *  drzeni hodnoty formulare, pokud nefunguje validace pomoci bootstrap a js */
 $frm = new Inc\CancelForm();
 
 /* - submit formulare - otestovani hodnot, vypsani chyby - hlavne pokud je vypnuty JS
  * - presun kontaktu v ramci seznamu SE - API - https://www.smartemailing.cz/api/
  */
-$frm->sendCancelForm($_POST);
+$frm->processCancelForm($_POST);
 ?>
 <!DOCTYPE html>
 <html lang="cs-CZ">

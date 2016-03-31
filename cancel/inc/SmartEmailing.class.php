@@ -1,5 +1,4 @@
 <?php
-/*namespace definition*/
 namespace Inc;
 /**
  * Description of SmartEmailing class

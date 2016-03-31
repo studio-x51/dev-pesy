@@ -1,6 +1,5 @@
 <?php
 namespace Inc;
-include_once('LinkedException.class.php');
 /**
  * Description of mysql class
  *

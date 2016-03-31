@@ -1,4 +1,5 @@
 <?php
+namespace Inc;
 /**
  * Description of SmartEmailing class
  *
@@ -8,11 +9,11 @@
 class SmartEmailing {
 
   /*@var static value - id of testing contact list in SE account*/
-  private static $pesy_test_list_id = 94;
+  public static $pesy_test_list_id = 94;
   /*@var static value - id of premium contact list - users with premium*/
-  private static $premium_list_id = 69;
+  public static $premium_list_id = 69;
   /*@var static value - id of premium cancel contact list - premium cancel request*/
-  private static $premium_cancel_id = 95;
+  public static $premium_cancel_id = 95;
   /*@var static value - token to access API SE, credentials*/
   private $token = 'TApH2gLh2cKKf00ehlcAFPMHZ6w1OpjocvYXCeDO';
   /*@var static value - username to access API SE, credentials*/
@@ -28,12 +29,14 @@ class SmartEmailing {
   }  
   
   /**
-   * Function to set user email into new contact list {$premium_cancel_id} and remove from orifinal {$premium_list_id}
+   * Function to set (CONFIRM) user email into new contact list {$listto} and REMOVE from orifinal {$listfrom}
    * @param string $email - user email
+   * @param integer $listfrom - remove email from contactlist ID
+   * @param integer $listto - confirm email to contactlist ID
    * @return boolean|string - false if email is not set, string when success via sendRequest
    * @see sendRequest()
    */
-  public function createCancelAction($email) {
+  public function removeEmailFromTo($email, $listfrom, $listto) {
     if (!$email) {return false;}
     $xml = "
       <xmlrequest>
@@ -46,11 +49,11 @@ class SmartEmailing {
           <language>cs_CZ</language> <!-- cs_CZ | sk_SK | en_GB -->
           <contactliststatuses>
             <item>
-              <id>".self::$pesy_test_list_id."</id>
+              <id>".intval($listfrom)."</id>
               <status>removed</status>
             </item>
             <item>
-              <id>".self::$premium_cancel_id."</id>
+              <id>".intval($listto)."</id>
               <status>confirmed</status>
               <!-- unconfirmed | confirmed | unsubscribed | banned | removed -->              
             </item>            

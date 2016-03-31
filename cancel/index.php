@@ -6,14 +6,14 @@ error_reporting($err);
 
 // definition of premium_cancel_reason
 include_once '../aa/inc/global_parameters.php'; 
-include_once 'inc/CancelForm.class.php';
+include_once 'inc/cancelForm.class.php';
 
 /* pole hodnot pro select odpovedi */
 $answer_arr = $CONF_XTRA["premium_cancel_reason"]['cs'];
 
 /*  instance tridy Form, 
  *  drzeni hodnoty formulare, pokud nefunguje validace pomoci bootstrap a js */
-$frm = new Inc\CancelForm();
+$frm = new cancelForm();
 
 /* - submit formulare - otestovani hodnot, vypsani chyby - hlavne pokud je vypnuty JS
  * - presun kontaktu v ramci seznamu SE - API - https://www.smartemailing.cz/api/

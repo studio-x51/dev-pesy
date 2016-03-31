@@ -1,13 +1,16 @@
 <?php
-namespace Inc;
-include_once ('Base.class.php');
-include_once ('SmartEmailing.class.php');
+
+//include_once ('lib.php');
+include_once ('database.php');
+include_once ('mysql.class.php');
+include_once ('smartemailing.class.php');
+
 /**
  * Description of cancelForm class
  *
  * @author pesy petr.syrny@x51.cz
  */
-class CancelForm extends Base {
+class cancelForm {
 
   /*@var table owner*/
   public $tbl_owner = 'owner';
@@ -24,7 +27,8 @@ class CancelForm extends Base {
    * access to mysql methods via $this->db
    */
   public function __construct() {
-    $this->db = parent::makeDbConnection();
+    global $database;
+    $this->db = new mysql($database['server'], $database['user'],$database['password'], $database['database']);
   }
   
   /** Escape string, from input, insert to database etc.
@@ -107,7 +111,7 @@ class CancelForm extends Base {
         // update owner column DT_REQUEST_CANCEL, CANCEL_REASON, CANCEL_NOTICE
         if ($this->setOwnerCancelRequest($fb_id, $cancel_reason, $cancel_notice)) {
           $se = new SmartEmailing();
-          if ($se->removeEmailFromTo($email, SmartEmailing::$pesy_test_list_id, SmartEmailing::$premium_cancel_id) == true) {
+          if ($se->createCancelAction($email) == true) {
             $_SESSION['cancel_send_success'] = true;
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
             header('Location: '.$protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);

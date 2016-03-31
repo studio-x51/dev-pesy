@@ -1,12 +1,12 @@
 <?php
-namespace Inc;
-include_once('LinkedException.class.php');
+include_once('linkedException.class.php');
+
 /**
  * Description of mysql class
  *
  * @author pesy petr.syrny@kulturne.com
  */
-class Mysql {
+class mysql {
 	private $link; ///< spojeni k databazi
 	private $lastQuery; ///< posledni polozeny dotaz
 	public $error; ///< zprava o chybe MySQL dotazu

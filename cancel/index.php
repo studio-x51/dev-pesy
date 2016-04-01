@@ -7,7 +7,7 @@ mb_internal_encoding("UTF-8");
 
 /* autoload of classes */
 function __autoload($class_name)  {
-  require_once "".$class_name.".class.php";
+  include_once 'inc/' . $class_name . '.class.php';
 }
 
 // definition of premium_cancel_reason
@@ -18,7 +18,7 @@ $answer_arr = $CONF_XTRA["premium_cancel_reason"]['cs'];
 
 /*  instance tridy Form, autoload tridy
  *  drzeni hodnoty formulare, pokud nefunguje validace pomoci bootstrap a js */
-$frm = new Inc\CancelForm();
+$frm = new CancelForm();
 
 /* - submit formulare - otestovani hodnot, vypsani chyby - hlavne pokud je vypnuty JS
  * - presun kontaktu v ramci seznamu SE - API - https://www.smartemailing.cz/api/

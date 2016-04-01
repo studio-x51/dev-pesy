@@ -1,23 +1,22 @@
 <?php
-namespace Inc;
 /**
  * Description of Base abstract class
  *
  * @author pesy
  */
-abstract class Base {
+abstract class Base extends Config {
   
   /*@var for definition mysql instance*/
   private $mysql;
   
   /**
    * Method to make connection to DB
-   * @return object instance of mysql
+   * @return object instance of mysql (parameters from parent class Config)
    * @author pesy
    */
   protected function createDbConnection() {
-    global $database;
-    $this->mysql = new mysql($database['server'], $database['user'],$database['password'], $database['database']);
+    $conn_params = parent::getDbCredentials();
+    $this->mysql = new Mysql($conn_params['s'], $conn_params['u'], $conn_params['p'], $conn_params['d']);
     return $this->mysql;
   }
   

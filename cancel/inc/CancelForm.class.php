@@ -1,5 +1,4 @@
 <?php
-namespace Inc;
 /**
  * Description of cancelForm class
  *

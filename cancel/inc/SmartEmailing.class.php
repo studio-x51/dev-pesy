@@ -1,12 +1,11 @@
 <?php
-namespace Inc;
 /**
  * Description of SmartEmailing class
- *
+ * API: https://app.smartemailing.cz/api/v2
  * @author pesy petr.syrny@x51.cz
  * @todo LOGOVANI CHYB
  */
-class SmartEmailing {
+class SmartEmailing extends Base {
 
   /*@var static value - id of testing contact list in SE account*/
   public static $pesy_test_list_id = 94;
@@ -14,10 +13,6 @@ class SmartEmailing {
   public static $premium_list_id = 69;
   /*@var static value - id of premium cancel contact list - premium cancel request*/
   public static $premium_cancel_id = 95;
-  /*@var static value - token to access API SE, credentials*/
-  private $token = 'TApH2gLh2cKKf00ehlcAFPMHZ6w1OpjocvYXCeDO';
-  /*@var static value - username to access API SE, credentials*/
-  private $username = 'tomas.vans@seznam.cz';
 
   /**
    * Show result
@@ -30,6 +25,7 @@ class SmartEmailing {
   
   /**
    * Function to set (CONFIRM) user email into new contact list {$listto} and REMOVE from orifinal {$listfrom}
+   * Credentials for SE connection are delivered by parent method getSECredentials()
    * @param string $email - user email
    * @param integer $listfrom - remove email from contactlist ID
    * @param integer $listto - confirm email to contactlist ID
@@ -38,10 +34,11 @@ class SmartEmailing {
    */
   public function removeEmailFromTo($email, $listfrom, $listto) {
     if (!$email) {return false;}
+    $credentials = parent::getSECredentials();
     $xml = "
       <xmlrequest>
-        <username>{$this->username}</username>
-        <usertoken>{$this->token}</usertoken>
+        <username>{$credentials['username']}</username>
+        <usertoken>{$credentials['token']}</usertoken>
         <requesttype>Contacts</requesttype>
         <requestmethod>createupdate</requestmethod>
         <details>

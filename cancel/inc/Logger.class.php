@@ -1,6 +1,4 @@
 <?php
-namespace Inc;
-
 /**
  * Description of Logger class
  *

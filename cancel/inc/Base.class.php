@@ -6,8 +6,8 @@
  */
 abstract class Base extends Config {
   
-  /*@var for definition mysql instance*/
-  private $mysql;
+  /*@var $db - for definition mysql instance*/
+  protected $db;
   
   /**
    * Method to make connection to DB
@@ -16,9 +16,17 @@ abstract class Base extends Config {
    */
   protected function createDbConnection() {
     $conn_params = parent::getDbCredentials();
-    $this->mysql = new Mysql($conn_params['s'], $conn_params['u'], $conn_params['p'], $conn_params['d']);
-    return $this->mysql;
+    $this->db = new Mysql($conn_params['s'], $conn_params['u'], $conn_params['p'], $conn_params['d']);
+    return $this->db;
   }
+  
+	public function getQuery($query) {
+  	$this->db->query($query, $result);
+    	while ($res__ = $this->db->fetchArrayResult($result,MYSQL_ASSOC)) {
+				$data[] = $res__;
+			}
+    return $data;   		
+	}	    
   
   /** 
    * Escape string, from input, insert to database etc.

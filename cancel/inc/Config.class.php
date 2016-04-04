@@ -30,9 +30,9 @@ class Config {
   
   /*SMARTEMAILING section*/
   
-  /*@var static value - token to access API SE, credentials*/
+  /*@var $cf_se_token - token to access API SE, credentials*/
   private $cf_se_token = 'TApH2gLh2cKKf00ehlcAFPMHZ6w1OpjocvYXCeDO';
-  /*@var static value - username to access API SE, credentials*/
+  /*@var $cf_se_username - username to access API SE, credentials*/
   private $cf_se_username = 'tomas.vans@seznam.cz';  
   
   /*/SMARTEMAILING section*/

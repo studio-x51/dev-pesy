@@ -7,13 +7,24 @@
  */
 class SmartEmailing extends Base {
 
-  /*@var static value - id of testing contact list in SE account*/
+  /*@var static $pesy_test_list_id - id of testing contact list in SE account*/
   public static $pesy_test_list_id = 94;
-  /*@var static value - id of premium contact list - users with premium*/
+  /*@var static $premium_list_id - id of premium contact list - users with premium*/
   public static $premium_list_id = 69;
-  /*@var static value - id of premium cancel contact list - premium cancel request*/
+  /*@var static $premium_cancel_id - id of premium cancel contact list - premium cancel request*/
   public static $premium_cancel_id = 95;
-
+  /*@var $log - instance of logger object*/
+  private $log;
+  
+  
+  /**
+   * Constructor of class
+   * - initialize of logger class
+   */
+  public function __construct() {
+    $this->log = new Logger();
+  }  
+  
   /**
    * Show result
    */

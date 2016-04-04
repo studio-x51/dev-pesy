@@ -6,22 +6,24 @@
  */
 class CancelForm extends Base {
 
-  /*@var table owner*/
+  /*@var $tbl_owner - table owner*/
   public $tbl_owner = 'owner';
-  /*@var data of owner - selected by email*/
+  /*@var $owner_data - data of owner - selected by email*/
   public $owner_data = array();
-  /*@var value of error message*/
+  /*@var $errorMessage - value of error message*/
   public $errorMessage = null;
-  /*@var value of success message*/
+  /*@var $successMessage - value of success message*/
   public $successMessage = null;
-  /*@var database conection, object*/
-  private $db;
+  /*@var $log - instance of logger object*/
+  private $log;
 
   /** Class constructor, initialization of mysql object
-   * access to mysql methods via $this->db
+   * - access to mysql methods via $this->db in parent
+   * - initialize logger class
    */
   public function __construct() {
-    $this->db = parent::createDbConnection();
+    parent::createDbConnection();
+    $this->log = new Logger();
   }
   
   /**
@@ -71,6 +73,8 @@ class CancelForm extends Base {
         $this->errorMessage = 'Zadejte platnou emailovou adresu - xxxx@xxx.xx';
       } elseif (!$this->ownerEmailExists($email)) {
         $this->errorMessage = 'Vámi <strong>zadaný e-mail neznáme</strong>.<br /><br /> Zadejte prosím e-mail, který je <strong>propojený s Vaším osobním facebookovým účtem, pod kterým se přihlašujete do SocialSprinters</strong>.';
+        //Logger::logit();
+        //$this->log->logitDb();
       }
       // no error - continue to process request
       // set timestamp in column DT_REQUEST_CANCEL

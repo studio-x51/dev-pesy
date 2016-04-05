@@ -13,7 +13,7 @@ class Config {
   /*CONSTANTS section*/
   
   /*@const CONF_BASE_DIR - base directory of project*/
-  const CONF_BASE_DIR = "e://xampp/htdocs/x51/dev-pesy/"; // localhost 
+  const CONF_BASE_DIR = "e:/xampp/htdocs/x51/dev-pesy/"; // localhost 
   /*@const CONF_HOSTNAME - root hostname url*/
   const CONF_HOSTNAME = "http://localhost/x51/"; // localhost
   /*@const CONF_HOSTFOLDER - folder hostname url*/
@@ -27,8 +27,7 @@ class Config {
 
   /* socialsprinters - deployment test, pesy*/
   /*const CONF_BASE_DIR = "/web/www.socialsprinters.cz/dev-pesy/";
-  const CONF_HOSTNAME = 'http://www.socialsprinters.cz/';
-  const LOGS_DIR_NAME = "logs/";*/
+  const CONF_HOSTNAME = 'http://www.socialsprinters.cz/';*/
   
   /* /CONSTANTS section*/
   
@@ -62,6 +61,12 @@ class Config {
   /*/SMARTEMAILING section*/
   
   //----------------------------------------------------------------------------
+  
+  /*GOPAY section*/
+  
+  /*/GOPAY section*/
+  
+  //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
   
   /**
@@ -81,5 +86,9 @@ class Config {
   protected function getSECredentials() {
     return array("token"=>$this->cf_se_token,"username"=>$this->cf_se_username);
   }  
+  
+  protected function getGopayConfig() {
+    
+  }
   
 }

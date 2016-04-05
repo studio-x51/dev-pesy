@@ -46,7 +46,7 @@ class Logger extends Base {
       umask(0000); 
       mkdir($this->path,0777);
     }
-    $file = ($file == NULL ) ? $this->path."/".$this->filename : $this->path."/".$file;
+    $file = ($file == NULL ) ? $this->path.$this->filename : $this->path.$file;
     if(!is_file($file)) {
       touch($file); 
       @chmod($file, 0666);

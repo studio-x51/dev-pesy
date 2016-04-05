@@ -16,6 +16,7 @@ class SmartEmailing extends Base {
   private $log;
   /*@var $log_filename - variable definition of logger save filename*/
   private $log_filename = 'smartemailing.log';  
+  private $api_url = 'https://app.smartemailing.cz/api/v2';
   
   /**
    * Constructor of class
@@ -79,7 +80,7 @@ class SmartEmailing extends Base {
    */
   protected function sendRequest($xml) {
     if(!$xml) {return false;}
-    $ch = curl_init('https://app.smartemailing.cz/api/v2');
+    $ch = curl_init($this->api_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);

@@ -6,6 +6,9 @@
  */
 class CancelForm extends Base {
 
+  /*@const OWN_FOLDER - variable foldername, definition logger path*/
+  const OWN_FOLDER = 'cancel/';
+  
   /*@var $tbl_owner - table owner*/
   public $tbl_owner = 'owner';
   /*@var $owner_data - data of owner - selected by email*/
@@ -16,14 +19,20 @@ class CancelForm extends Base {
   public $successMessage = null;
   /*@var $log - instance of logger object*/
   private $log;
+  /*@var $log_path - variable definition of logger directory path, where save file*/
+  private $log_path;
+  /*@var $log_filename - variable definition of logger save filename*/
+  private $log_filename = 'premium_cancel.log';
 
+  
   /** Class constructor, initialization of mysql object
    * - access to mysql methods via $this->db in parent
-   * - initialize logger class
+   * - initialize logger class - own save path definition
    */
   public function __construct() {
     parent::createDbConnection();
-    $this->log = new Logger();
+    $this->log_path = Config::CONF_BASE_DIR.self::OWN_FOLDER.Config::LOGS_DIR_NAME;
+    $this->log = new Logger($this->log_path, $this->log_filename);
   }
   
   /**
@@ -42,7 +51,7 @@ class CancelForm extends Base {
 		$this->db->query($query, $result_user);
 		$row = $this->db->fetchArrayResult($result_user, MYSQL_ASSOC);
     $this->owner_data = $row;
-    if (is_array($row)&&(count($row)>0)) { return true; }
+    if (is_array($row)&&(count($row)>0)) return true;
   }
 
   /**
@@ -73,8 +82,7 @@ class CancelForm extends Base {
         $this->errorMessage = 'Zadejte platnou emailovou adresu - xxxx@xxx.xx';
       } elseif (!$this->ownerEmailExists($email)) {
         $this->errorMessage = 'Vámi <strong>zadaný e-mail neznáme</strong>.<br /><br /> Zadejte prosím e-mail, který je <strong>propojený s Vaším osobním facebookovým účtem, pod kterým se přihlašujete do SocialSprinters</strong>.';
-        //Logger::logit();
-        //$this->log->logitDb();
+        $this->log->logit('error','neznamy email, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.'');
       }
       // no error - continue to process request
       // set timestamp in column DT_REQUEST_CANCEL
@@ -82,8 +90,10 @@ class CancelForm extends Base {
         $fb_id = strval($this->owner_data['fb_id']);
         // update owner column DT_REQUEST_CANCEL, CANCEL_REASON, CANCEL_NOTICE
         if ($this->setOwnerCancelRequest($fb_id, $cancel_reason, $cancel_notice)) {
+          $this->log->logit('debug','zadost ulozena, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.'');
           $se = new SmartEmailing();
-          if ($se->removeEmailFromTo($email, SmartEmailing::$pesy_test_list_id, SmartEmailing::$premium_cancel_id) == true) {
+          if ($se->removeEmailFromTo($email, SmartEmailing::$premium_list_id, SmartEmailing::$premium_cancel_id) == true) {
+            $this->log->logit('debug','smartemailing prevod kontaktu, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.', from: '.SmartEmailing::$premium_list_id.' do: '.SmartEmailing::$premium_cancel_id.'');
             $_SESSION['cancel_send_success'] = true;
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://';
             header('Location: '.$protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);

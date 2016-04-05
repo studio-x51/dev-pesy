@@ -10,6 +10,30 @@ class Config {
   
   //----------------------------------------------------------------------------
   
+  /*CONSTANTS section*/
+  
+  /*@const CONF_BASE_DIR - base directory of project*/
+  const CONF_BASE_DIR = "e://xampp/htdocs/x51/dev-pesy/"; // localhost 
+  /*@const CONF_HOSTNAME - root hostname url*/
+  const CONF_HOSTNAME = "http://localhost/x51/"; // localhost
+  /*@const CONF_HOSTFOLDER - folder hostname url*/
+  const CONF_HOSTFOLDER = 'dev-pesy/'; // localhost 
+  /*@const LOGS_DIR_NAME - folder name for logger*/
+  const LOGS_DIR_NAME = "logs/"; // localhost
+  /*@const SITE_NAME - site name*/
+  const SITE_NAME = '';
+  /*@const VERSION - version number*/
+  const VERSION = '1.0';
+
+  /* socialsprinters - deployment test, pesy*/
+  /*const CONF_BASE_DIR = "/web/www.socialsprinters.cz/dev-pesy/";
+  const CONF_HOSTNAME = 'http://www.socialsprinters.cz/';
+  const LOGS_DIR_NAME = "logs/";*/
+  
+  /* /CONSTANTS section*/
+  
+  //----------------------------------------------------------------------------
+  
   /*DB section*/
   
   private $cf_db_server = 'localhost';

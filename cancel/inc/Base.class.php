@@ -2,7 +2,7 @@
 /**
  * Description of Base abstract class
  *
- * @author pesy
+ * @author pesy petr.syrny@x51.cz
  */
 abstract class Base extends Config {
   
@@ -20,7 +20,13 @@ abstract class Base extends Config {
     return $this->db;
   }
   
-	public function getQuery($query) {
+	/**
+   * Procces sql query and return data array
+   * @param string $query - query to execute
+   * @return array - result of query, data array
+   * @author pesy 
+   */
+  public function getQuery($query) {
   	$this->db->query($query, $result);
     	while ($res__ = $this->db->fetchArrayResult($result,MYSQL_ASSOC)) {
 				$data[] = $res__;

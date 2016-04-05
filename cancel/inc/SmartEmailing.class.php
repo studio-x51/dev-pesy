@@ -3,26 +3,26 @@
  * Description of SmartEmailing class
  * API: https://app.smartemailing.cz/api/v2
  * @author pesy petr.syrny@x51.cz
- * @todo LOGOVANI CHYB
  */
 class SmartEmailing extends Base {
 
   /*@var static $pesy_test_list_id - id of testing contact list in SE account*/
   public static $pesy_test_list_id = 94;
   /*@var static $premium_list_id - id of premium contact list - users with premium*/
-  public static $premium_list_id = 69;
+  public static $premium_list_id = 94; // SS production = 69!
   /*@var static $premium_cancel_id - id of premium cancel contact list - premium cancel request*/
   public static $premium_cancel_id = 95;
   /*@var $log - instance of logger object*/
   private $log;
-  
+  /*@var $log_filename - variable definition of logger save filename*/
+  private $log_filename = 'smartemailing.log';  
   
   /**
    * Constructor of class
-   * - initialize of logger class
+   * - initialize of logger class - default saving directory
    */
   public function __construct() {
-    $this->log = new Logger();
+    $this->log = new Logger('',$this->log_filename);    
   }  
   
   /**
@@ -76,7 +76,6 @@ class SmartEmailing extends Base {
    * Function that process SE API requests
    * @param string $xml - xml type request
    * @return boolean|string
-   * @todo Logging error, exception etc.
    */
   protected function sendRequest($xml) {
     if(!$xml) {return false;}
@@ -86,28 +85,26 @@ class SmartEmailing extends Base {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
     $result = curl_exec($ch);
     if ($result === false) {
-      echo "Chyba v zasilani XML requestu!";
+      //echo "Chyba v zasilani XML requestu!";
+      $this->log->logit("debug","smartmailing sendRequest: Chyba v zasilani XML requestu!");	
     } else {
       header ("Content-Type:text/xml");
       //$this->v($result);
       /** @noinspection PhpUsageOfSilenceOperatorInspection */
       $xml_doc = @simplexml_load_string($result); // intentionally @
+      $this->log->logit("debug","smartmailing sendRequest:".error_log($xml_doc));	
       if (!$xml_doc) {
-        //echo "ERR in request" . PHP_EOL;
+        $this->log->logit("debug","smartmailing ERR in request");	
         return "ERR in request";
         //$this->v($result);
       }
-      //echo PHP_EOL . $result . PHP_EOL . '------------------' . PHP_EOL;
       //echo 'Status is ' . $xml_doc->status . PHP_EOL;
       if ($xml_doc->status == 'SUCCESS') {
-        //print_r($xml_doc->data);
-        //return "SUCCESS";
+        $this->log->logit("debug","smartmailing SUCCESS");	
         return true;			
       } else {
+        $this->log->logit("debug","smartmailing err:".$xml_doc->errormessage);	
         return false;
-        //return "ERROR";
-        //log - SE ERROR
-        //echo $xml_doc->errormessage;
       }
     }
   }  

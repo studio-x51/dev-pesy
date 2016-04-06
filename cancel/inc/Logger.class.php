@@ -42,17 +42,17 @@ class Logger extends Base {
    * @return void
    */    
   public function logit($level, $text, $file = NULL) {
-    if(!is_dir($this->path)) {
+  	if(!is_dir($this->path)) {
       umask(0000); 
       mkdir($this->path,0777);
-    }
-    $file = ($file == NULL ) ? $this->path.$this->filename : $this->path.$file;
-    if(!is_file($file)) {
-      touch($file); 
-      @chmod($file, 0666);
+    }  
+    $file_ = ($file == NULL ) ? $this->path.$this->filename : $file;
+    if(!is_file($file_)) {
+      touch($file_); 
+      @chmod($file_, 0666);
     }
     if (!in_array($level, $this->getLevels())) return;
-    $f = fopen($file,'a');
+    $f = fopen($file_,'a');
     fwrite($f,"[".date('Y-m-d H:i:s')."-".microtime().", $level, ".$_SERVER['REMOTE_ADDR']." ".$_SERVER['PHP_SELF']." ".$_SERVER['HTTP_USER_AGENT']."], ".$text);
     fwrite($f,"\r\n");
     fclose($f);

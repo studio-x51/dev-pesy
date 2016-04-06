@@ -1,4 +1,5 @@
 <?php
+include_once('Logger.class.php');
 /**
  * Description of GoPay
  *
@@ -16,6 +17,18 @@
 
 
 class GoPay extends Base {
+  
+  
+  public static $payment_state = array('CREATED'=>'Platba založena',
+																			'PAYMENT_METHOD_CHOSEN'=>'Platební metoda vybrána',
+																			'PAID'=>'Platba zaplacena',
+																			'AUTHORIZED'=>'Platba předautorizována',
+																			'CANCELED'=>'Platba zrušena',
+																			'TIMEOUTED'=>'Vypršelá platnost platby',
+																			'REFUNDED'=>'Platba refundována',
+																			'PARTIALLY_REFUNDED'=>'Platba částečně refundována');
+																			
+	private $payment_data;
   
   /*Kulturne.com - test gateway */
   private $client_id = 1694553993;
@@ -44,7 +57,11 @@ class GoPay extends Base {
 
   private $config;
   
+  private $log;
+  
   public function __construct($isSandbox = false) {
+  	$path_file = __DIR__.'/logs';
+  	$this->log = new Logger($path_file);
   	if ($isSandbox) {
   		// TODO - logger
   	 	// TODO - definition config in Base
@@ -80,7 +97,6 @@ class GoPay extends Base {
     }			
   }
   
-  
 	/**
 	* Utility token - payment-all - for other operation (state, refund, payment)
 	* @return array - json data array of result	
@@ -106,32 +122,50 @@ class GoPay extends Base {
 			return json_decode($str);
     }			
 	}  
+
+
+	public function setPaymentData(array $paymentData) {
+		if (!$paymentData) return;
+		$this->payment_data = $paymentData;
+	}
 	
+	public function getPaymentData() {
+		if (!is_array($this->payment_data)) return;
+		return $this->payment_data;
+	}
+
 	
+	/**
+	 * TODO - argumenty funkce, prenaset definici pole dat (contact apod.)
+	 * @param array $paymentData - array of important data to create payment	 	
+	 */
 	public function createPayment() {
+		//if (!$paymentData) return;
+		$path_file = __DIR__.'/logs/gopay_create_payment.log';
 		$paymentToken = $this->getPaymentToken();
+		$pd = $this->getPaymentData();
 		$data = array(
 			"payer" => array(
 				"default_payment_instrument"=>"PAYMENT_CARD", // defaulten nastavene, ale lze prepnout platebni metodu - nahore nad oknem!
-				"allowed_payment_instruments"=> array("PAYMENT_CARD", "MPAYMENT"), // vsechny platebni metody
+				"allowed_payment_instruments"=>array("PAYMENT_CARD"), // vsechny platebni metody mohou byt v poli - array("PAYMENT_CARD", "MPAYMENT")
 				"contact" => array(
-					"first_name"=>'Jan',
-					"last_name"=>'Nepomuk',
-					"email"=>'info@kulturne.com',
-					"phone_number"=>"+420724528287",
-					"city"=>"Tábor",
-					"street"=>"Kpt.Jaroše 2381",
-					"postal_code"=>"390 01",
-					"country_code"=>"CZE"
+					"first_name"=>$pd['contact']['first_name'],
+					"last_name"=>$pd['contact']['last_name'],
+					"email"=>$pd['contact']['email'],
+					"phone_number"=>$pd['contact']['phone_number'],
+					"city"=>$pd['contact']['city'],
+					"street"=>$pd['contact']['street'],
+					"postal_code"=>$pd['contact']['postal_code'],
+					"country_code"=>$pd['contact']['country_code']
 					)
 			),
 			"target" => array(
 				"type"=>"ACCOUNT",
 				"goid"=>$this->goId
 			),
-			"amount"=> '1666',
+			"amount"=> '166600', // cena v halerich
 			"currency"=> 'CZK',
-			"order_number"=> '10000002',
+			"order_number"=> '10000004',
 			"order_description" => 'testovaci platba z API',
 			"items"=> array(
 				//array("name"=>"item01","amount"=>"1000"),
@@ -146,15 +180,13 @@ class GoPay extends Base {
 				// max. 4 parametry, jinak nemaka :-(			
 			), 
 			"callback"=> array(
-				"return_url"=> 'http://www.petrsyrny.cz/return',
-				"notification_url"=> 'http://www.petrsyrny.cz/notify',
+				"return_url"=> 'http://www.petrsyrny.cz/utils/gopay/return.php',
+				"notification_url"=> 'http://www.petrsyrny.cz/utils/gopay/notify.php',
 			),
 			"lang"=>'cs'
 		);
-	
-		//logit("debug","GOPAY createPayment gopay-payment_url: ".$CONF["gopay-payment_url"],$CONF_BASE_DIR."logs/gopay_create_payment.log");
-		//logit("debug","GOPAY createPayment data: ".serialize($data),$CONF_BASE_DIR."logs/gopay_create_payment.log");
-	
+		$this->log->logit("debug","GOPAY createPayment gopay-payment_url: ".$this->sandbox_gopay_payment_url, $path_file);
+		$this->log->logit("debug","GOPAY createPayment data: ".serialize($data), $path_file);
 		$data_string = json_encode($data);
 		// create a new cURL resource
 		$ch = curl_init();
@@ -169,7 +201,6 @@ class GoPay extends Base {
 	//		'Content-Length: ' . strlen($data_string)
 			)
 		);
-	
 		ob_start(); 
 		// grab URL and pass it to the browser
 		curl_exec($ch);
@@ -177,9 +208,69 @@ class GoPay extends Base {
 		curl_close($ch);
 		$str = ob_get_clean(); 
 		//echo $str;
-		//logit("debug","GOPAY createPayment syrove: fb_id=".$_SESSION["user"][APLIKACE_UNIQ_ID].",".$str,$CONF_BASE_DIR."logs/gopay_create_payment.log");
+		$this->log->logit("debug","GOPAY createPayment syrove : $str", $path_file);
 		return json_decode($str);
 	}
   
+  
+	/**
+	* Inline gateway
+	* - to show gateway, do echo of this function (show button)	
+	*/
+	public function gateWayInline() {
+		ob_start();
+		$createPayment = $this->createPayment();
+		?>
+		<!-- platebni brana -->
+		<form action="<?echo $createPayment->gw_url;?>" method="post" id="gopay-payment-button">
+			<button name="pay" type="submit">Zaplatit</button>
+			<script type="text/javascript" src="<?php echo $this->sandbox_gopay_js_embed?>"></script>
+		</form>
+		<!-- /platebni brana -->
+		<?
+		return ob_get_clean();
+	}
+	
+	/**
+	* Redirect gateway
+	*/
+	public function gateWayRedirect() {
+		ob_start();
+		$createPayment = $this->createPayment();
+		?>
+		<!-- platebni brana -->
+		<form action="<?echo $createPayment->gw_url;?>" method="post">
+			<button name="pay" type="submit">Zaplatit</button>
+		</form>
+		<!-- /platebni brana -->
+		<?
+		return ob_get_clean();
+	}		  
+
+
+	public function getPaymentState($idpayment) {
+		$path_file = __DIR__.'/logs/gopay_notify_state.log';
+		$this->log->logit("log", "PLATBA - GoPay->getPaymentState ID=: ".$idpayment, $path_file);
+		$getPaymentToken = $this->getPaymentToken();
+		$ch = curl_init();
+		// set URL and other appropriate options
+		curl_setopt($ch, CURLOPT_URL, $this->sandbox_gopay_payment_url."/".$idpayment);
+		curl_setopt($ch, CURLOPT_HTTPGET, 1); 
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Accept: application/json',
+			'Content-Type: application/x-www-form-urlencoded',
+			'Authorization: Bearer '.$getPaymentToken->access_token
+	//		'Content-Length: ' . strlen($data_string)
+			)
+		);
+		ob_start(); 
+		// grab URL and pass it to the browser
+		curl_exec($ch);
+		// close cURL resource, and free up system resources
+		curl_close($ch);
+		$str = ob_get_clean(); 
+		$this->log->logit("log", "PLATBA - GoPay->getPaymentState CURL: ".$str, $path_file);
+		return json_decode($str);
+	} 
   
 }

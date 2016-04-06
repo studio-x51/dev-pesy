@@ -32,7 +32,7 @@
       <textarea cols="60" rows="6" name="cancel_notice" placeholder="Prostor pro doplňující informace.."><?php echo $frm->keepValueRet($_POST['cancel_notice'])?></textarea>
 		</p>
 		<p class="tac">
-      <button type="submit" class="btn" name="cancel_send">Zrušit členství</button>
+      <button type="submit" class="btn" name="cancel_send">Odeslat žádost o zrušení členství</button>
 		</p>
 	</fieldset>
 </form>

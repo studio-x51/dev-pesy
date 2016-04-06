@@ -45,15 +45,15 @@ class CancelForm extends Base {
                 FROM  ".$this->tbl_owner."
                WHERE typ = 'premium'
                  AND ((email = '".$email."' OR email_contact = '".$email."'))
-                 AND dt_request_cancel IS NULL
-                 AND status = 'active'
              ";
+    //AND status = 'active'
+    //AND dt_request_cancel IS NULL
 		$this->db->query($query, $result_user);
 		$row = $this->db->fetchArrayResult($result_user, MYSQL_ASSOC);
     $this->owner_data = $row;
     if (is_array($row)&&(count($row)>0)) return true;
   }
-
+  
   /**
    * Get owner array
    * @return array owner data if success, else is empty array
@@ -81,8 +81,22 @@ class CancelForm extends Base {
       } elseif (!empty($email)&&(!filter_var($email,FILTER_VALIDATE_EMAIL))) {
         $this->errorMessage = 'Zadejte platnou emailovou adresu - xxxx@xxx.xx';
       } elseif (!$this->ownerEmailExists($email)) {
-        $this->errorMessage = 'Vámi <strong>zadaný e-mail neznáme</strong>.<br /><br /> Zadejte prosím e-mail, který je <strong>propojený s Vaším osobním facebookovým účtem, pod kterým se přihlašujete do SocialSprinters</strong>.';
+        $this->errorMessage = 'Zadejte prosím e-mail, který je <strong>propojený s Vaším osobním facebookovým účtem, pod kterým se přihlašujete do SocialSprinters</strong>.';
         $this->log->logit('error','neznamy email, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.'');
+      } else {
+        $ownerData = $this->getOwnerData();
+        // opetovna zadost o zruseni clenstvi
+        if ($ownerData['dt_request_cancel'] != NULL) {
+          // zadost evidujeme, ale jeste nebyla zpracovana - active, pending
+          if ($ownerData['status'] == 'active' || $ownerData['status'] == 'pending' ) {
+            $this->errorMessage = 'Žádost pro email: '.$email.' <br /><strong>Vaši žádost již evidujeme a bude brzy zpracována</strong>.';  
+            $this->log->logit('debug','opetovna zadost - ceka na vyrizeni, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.', status: '.$ownerData['status'].'');
+          // zadost evidujeme, a byla jiz zpracovana - end, refund
+          } else {
+            $this->errorMessage = 'Žádost pro email: '.$email.' <br /><strong>Vaše žádost již byla vyřízena</strong>.';  
+            $this->log->logit('debug','opetovna zadost - jiz vyrizena, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.', status: '.$ownerData['status'].'');
+          }
+        }        
       }
       // no error - continue to process request
       // set timestamp in column DT_REQUEST_CANCEL

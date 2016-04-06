@@ -12,8 +12,7 @@ function menu_admin()
 			"prehled_uzivatelu" => "Přehled uživatelů",
 			"preklady" => "Překlady",
 			"test_aplikace" => "Přímé linky na test (detail) aplikace",
-			"premium_members" => "Premium members",
-      "premium_cancel" => "Premium - žádosti o zrušení členství",
+			"premium_members" => "Premium members"
 		);
 
 		foreach($menu as $php => $title) {

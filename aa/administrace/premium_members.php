@@ -1,12 +1,9 @@
 <?
 require_once("../inc/inc.php");
 require_once("../inc/fce_admin.php");
-
 if(!$_SESSION["access_admin_ss"]) {
 	header("location:./");
 }
-
-
 require_once("../inc/header.php");
 ?>
 <script type="text/javascript" src="../js/admin.js?time=<?=$CONF_XTRA["TIME_FILES"]?>"></script>
@@ -33,46 +30,73 @@ if($_POST) {
 
 	unset($_SESSION["texty"]);
 }
-
 ?>
 <link href="../css/admin.css" rel="stylesheet" media="all" type="text/css">
-
 <div id="admin">
-<?
-	menu_admin();
-?>
+<?php menu_admin();?>
 	<div>
-	<h1><?=txt("dashboard-description_licence-premium")?></h1>
-<?
+    <h1><?=txt("dashboard-description_licence-premium")?></h1>
 
-?>	
-	<h2>Příjem za období</h2>
-	<table class="prehled_table">
-		<tr>
-			<th>Období</th>
-			<th>Sum</th>
-			<th>Měna</th>
-		</tr>
-		<?echo statistika_prijmu_obdobi();?>
-	</table>	
-
-	<h2>Délka trvání členství</h2>
-	<?echo statistika_delky_clenstvi();?>
-
-	<h2>Vstup do členství Premium Members</h2>
-	<?=statistika_mesicni_clenstvi()?>
-
-	<h2>Přehled</h2>
-	<table class="prehled_table">
-		<?=statistika_celkovy_prehled()?>
-	</table>
-
-
+    <h2>Příjem za období</h2>
+    <table class="prehled_table">
+      <tr>
+        <th>Období</th>
+        <th>Sum</th>
+        <th>Měna</th>
+      </tr>
+      <?echo statistika_prijmu_obdobi();?>
+    </table>	
+    
+    <h2>Délka trvání členství</h2>
+    <?echo statistika_delky_clenstvi();?>
+    
+    <h2>Vstup do členství Premium Members</h2>
+    <?=statistika_mesicni_clenstvi()?>
+    
+    <h2>Žádosti o ukončení premium členství</h2>
+    <?php if (is_array(getCancelRequests())&&(count(getCancelRequests())>0)) {?>    
+      <table class="prehled_table">
+        <tr>
+          <th>#</th>
+          <th>Datum žádosti</th>
+          <th>FB ID</th>
+          <th>Uživatel</th>
+          <th>Email</th>
+          <th>Důvod</th>
+          <th>Poznámka</th>
+          <th>Akce</th>
+        </tr>
+        <?php 
+        $i=1; 
+        foreach (getCancelRequests() as $key => $req) {
+          $email = ($req['email']!='' && $req['email']!='undefined') ? $req['email'] : $req['email_contact'];
+          $notice = (!$req['cancel_notice']) ? 'x' : $req['cancel_notice'];
+          $reason = ($CONF_XTRA["premium_cancel_reason"]['cs'][$req['cancel_reason']]);
+        ?>
+          <tr>
+            <td><?php echo $i;?></td>
+            <td><?php echo htmlspecialchars_decode($req['dt_formatted'])?></td>
+            <td><?php echo htmlspecialchars_decode($key)?></td>
+            <td><?php echo htmlspecialchars_decode($req['fullName'])?></td>
+            <td><?php echo htmlspecialchars_decode($email)?></td>
+            <td><?php echo htmlspecialchars_decode($reason)?></td>
+            <td><?php echo htmlspecialchars_decode($notice)?></td>
+            <td>GoPay akce</td>
+          </tr>    
+        <?php 
+        $i++; 
+        } // foreach getUsers?>
+      </table>  
+    <?php } // if getUsers?>    
+    
+    <h2>Přehled</h2>
+    <table class="prehled_table">
+      <?=statistika_celkovy_prehled()?>
+    </table>
 	</div>
 
 </div><!--/id="admin"-->
 <?
-
 require_once("../inc/footer.php");
 
 /**
@@ -92,7 +116,6 @@ function statistika_prijmu_obdobi()
 			<td><?=$row["month"]."/".$row["year"]?></td><td><?=($row["celkem_mesic"]/100)?></td><td><?=$row["currency"]?></td>
 		</tr>
 <?
-
 	}
 	return ob_get_clean();
 }
@@ -115,7 +138,6 @@ function statistika_delka_trvani()
 			<td><?=$row["month"]."/".$row["year"]?></td><td><?=($row["celkem_mesic"]/100)?></td><td><?=$row["currency"]?></td>
 		</tr>
 <?
-
 	}
 	return ob_get_clean();
 }
@@ -335,5 +357,23 @@ function statistika_mesicni_clenstvi()
 	return $table;
 }		
 
+/* 
+ * Prehled zadosti o ukonceni premium clenstvi
+ * @return array $members - array of request (owner), if exists
+ */
+function getCancelRequests() {
+  $query_request = "SELECT O.*, CONCAT(O.prijmeni, ' ', O.jmeno) AS fullName,
+                           DATE_FORMAT(O.dt_request_cancel, '%d.%m.%Y %H:%i') AS dt_formatted
+                      FROM owner AS O
+                     WHERE O.dt_request_cancel IS NOT NULL
+                       AND typ = 'premium'
+                  ORDER BY O.dt_request_cancel DESC
+                  ";
+	dbQuery($query_request);
+	while($row = dbArrTiny()) {
+		$members[$row["fb_id"]]= $row;
+  }
+  return $members;
+}  
 
 ?>

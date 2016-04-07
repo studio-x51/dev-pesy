@@ -31,7 +31,8 @@ class CancelForm extends Base {
    */
   public function __construct() {
     parent::createDbConnection();
-    $this->log_path = Config::CONF_BASE_DIR.self::OWN_FOLDER.Config::LOGS_DIR_NAME;
+    //$this->log_path = Config::CONF_BASE_DIR.self::OWN_FOLDER.Config::LOGS_DIR_NAME;
+    $this->log_path = realpath(__DIR__ . '/..').'/logs/';
     $this->log = new Logger($this->log_path, $this->log_filename);
   }
   

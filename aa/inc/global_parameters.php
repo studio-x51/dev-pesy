@@ -4,8 +4,9 @@ $CONF_XTRA["TIME_FILES"] = "2016030801";
 $CONF_XTRA["smartmailing"]["premium"] = 69;
 $CONF_XTRA["smartmailing"]["premium_academy"] = 82;
 $CONF_XTRA["smartmailing"]["pdf26napadu"] = 91;
-$CONF_XTRA["smartmailing"]["new_user_zalozka"] = 74;
 $CONF_XTRA["smartmailing"]["premium_cancel"] = 95;
+$CONF_XTRA["smartmailing"]["premium_trial"] = 96;
+$CONF_XTRA["smartmailing"]["new_user_zalozka"] = 74;
 
 $CONF_XTRA["SHORT_HOST"] = "sprinte.rs";
 $CONF_XTRA["article:author"] = "http://www.socialsprinters.cz/";

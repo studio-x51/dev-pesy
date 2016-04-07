@@ -53,8 +53,8 @@ if($_POST) {
     <h2>Vstup do členství Premium Members</h2>
     <?=statistika_mesicni_clenstvi()?>
     
-    <h2>Žádosti o ukončení premium členství</h2>
     <?php if (is_array(getCancelRequests())&&(count(getCancelRequests())>0)) {?>    
+    <h2>Žádosti o ukončení premium členství</h2>
       <table class="prehled_table">
         <tr>
           <th>#</th>
@@ -64,6 +64,7 @@ if($_POST) {
           <th>Email</th>
           <th>Důvod</th>
           <th>Poznámka</th>
+          <th>Status</th>
           <th>Akce</th>
         </tr>
         <?php 
@@ -81,6 +82,7 @@ if($_POST) {
             <td><?php echo htmlspecialchars_decode($email)?></td>
             <td><?php echo htmlspecialchars_decode($reason)?></td>
             <td><?php echo htmlspecialchars_decode($notice)?></td>
+            <td>status</td>
             <td>GoPay akce</td>
           </tr>    
         <?php 

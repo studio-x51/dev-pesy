@@ -11,7 +11,8 @@ function __autoload($class_name)  {
 }
 
 // definition of premium_cancel_reason
-include_once '../aa/inc/global_parameters.php'; 
+include_once '../aa/inc/global_parameters.php'; // zmenit cestu
+//include_once '../aa-test-pesy/inc/global_parameters.php'; 
 
 /* pole hodnot pro select odpovedi */
 $answer_arr = $CONF_XTRA["premium_cancel_reason"]['cs'];

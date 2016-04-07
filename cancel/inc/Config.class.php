@@ -26,8 +26,12 @@ class Config {
   const VERSION = '1.0';
 
   /* socialsprinters - deployment test, pesy*/
-  /*const CONF_BASE_DIR = "/web/www.socialsprinters.cz/dev-pesy/";
+  /*const CONF_BASE_DIR = "/web/www.socialsprinters.cz/aa-test-pesy/";
   const CONF_HOSTNAME = 'http://www.socialsprinters.cz/';*/
+
+  /* socialsprinters - production*/
+  /*const CONF_BASE_DIR = "/web/www.socialsprinters.cz/aa/";
+  const CONF_HOSTNAME = 'http://www.socialsprinters.cz/';*/  
   
   /* /CONSTANTS section*/
   
@@ -46,6 +50,13 @@ class Config {
   private $cf_db_password = 'fhahfkg';
   private $cf_db_database = 'socialsp2_test';*/
   /* /DB - socialsprinters - test*/
+  
+  /* DB - socialsprinters - production*/
+  /*private $cf_db_server = '127.0.0.1';
+  private $cf_db_user = 'socialsp';
+  private $cf_db_password = 'fhahfkg';
+  private $cf_db_database = '';*/
+  /* /DB - socialsprinters - production*/  
   
   /*/DB section*/
   

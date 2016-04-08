@@ -107,6 +107,8 @@ class CancelForm extends Base {
         if ($this->setOwnerCancelRequest($fb_id, $cancel_reason, $cancel_notice)) {
           $this->log->logit('debug','zadost ulozena, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.'');
           $se = new SmartEmailing();
+          $message = 'Žadatel<br /> FB_ID: '.$fb_id.' <br /> email: '.$email.' <br /> uzivatel: '.$lastname.' '.$firstname.'';
+          $this->sendAcceptedEmail($message);
           if ($se->removeEmailFromTo($email, SmartEmailing::$premium_list_id, SmartEmailing::$premium_cancel_id) == true) {
             $this->log->logit('debug','smartemailing prevod kontaktu, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.', from: '.SmartEmailing::$premium_list_id.' do: '.SmartEmailing::$premium_cancel_id.'');
             $_SESSION['cancel_send_success'] = true;
@@ -124,6 +126,27 @@ class CancelForm extends Base {
 		}	      
 	}  	 
   
+  public function sendAcceptedEmail($message) {
+    $send_to = 'info@kulturne.com';
+    $mail = new PHPMailer();
+    $mail->CharSet = "utf-8";
+    $mail->ContentType = "text/html";
+    $mail->From  = 'noreply@x51.cz';
+    $mail->FromName = 'noreply@x51.cz';
+    $mail->AddAddress($send_to, "");        
+    $mail->Subject = 'Nová žádost o ukončení premium členství';
+    $mail->Body = "Právě byla zaznamenáná nová žádost o zrušení premium členství. Přehled žádostí naleznete v administraci SS. <br />";
+    $mail->Body .= $message."<br />";        
+    $mail->Body .= 'Na tento email neodpovídejte. Jedná se o automatickou notifikaci.';
+    if(!$mail->Send()) {
+      return false;  			
+    } else {
+      $this->log->logit('debug','odeslani notifikace, email o zalozeni nove zadosti odeslan na '.$send_to.'');
+      return true;
+    }	      
+  }
+  
+  
   /**
    * Process owner cancel request, set - update column DT_REQUEST_CANCEL 
    * @param string $fb_id primary key of owner, identification
@@ -134,7 +157,8 @@ class CancelForm extends Base {
       $query_upd = "UPDATE ".$this->tbl_owner."
                        SET dt_request_cancel = CURRENT_TIMESTAMP,
                            cancel_reason = '".intval($cancel_reason)."',
-                           cancel_notice = '".parent::toSafeData($cancel_notice)."'
+                           cancel_notice = '".parent::toSafeData($cancel_notice)."',
+                           status = 'pending'  
                      WHERE fb_id = '".trim($fb_id)."'
                        AND status = 'active'
                        AND typ = 'premium'

@@ -1,9 +1,12 @@
 <?
 require_once("../inc/inc.php");
 require_once("../inc/fce_admin.php");
+
 if(!$_SESSION["access_admin_ss"]) {
 	header("location:./");
 }
+
+
 require_once("../inc/header.php");
 ?>
 <script type="text/javascript" src="../js/admin.js?time=<?=$CONF_XTRA["TIME_FILES"]?>"></script>
@@ -30,30 +33,39 @@ if($_POST) {
 
 	unset($_SESSION["texty"]);
 }
+
 ?>
 <link href="../css/admin.css" rel="stylesheet" media="all" type="text/css">
-<div id="admin">
-<?php menu_admin();?>
-	<div>
-    <h1><?=txt("dashboard-description_licence-premium")?></h1>
 
-    <h2>Příjem za období</h2>
-    <table class="prehled_table">
-      <tr>
-        <th>Období</th>
-        <th>Sum</th>
-        <th>Měna</th>
-      </tr>
-      <?echo statistika_prijmu_obdobi();?>
-    </table>	
-    
-    <h2>Délka trvání členství</h2>
-    <?echo statistika_delky_clenstvi();?>
-    
-    <h2>Vstup do členství Premium Members</h2>
-    <?=statistika_mesicni_clenstvi()?>
-    
-    <?php if (is_array(getCancelRequests())&&(count(getCancelRequests())>0)) {?>    
+<div id="admin">
+<?
+	menu_admin();
+?>
+	<div>
+	<h1><?=txt("dashboard-description_licence-premium")?></h1>
+<?
+
+?>	
+	<h2>Příjem za období</h2>
+	<table class="prehled_table">
+		<tr>
+			<th>Období</th>
+			<th>Sum</th>
+			<th>Měna</th>
+		</tr>
+		<?echo statistika_prijmu_obdobi();?>
+	</table>	
+
+	<h2>Délka trvání členství</h2>
+	<?echo statistika_delky_clenstvi();?>
+
+	<h2>Vstup do členství Premium Members</h2>
+	<?=statistika_mesicni_clenstvi()?>
+
+    <?php
+	$getCancelRequests = getCancelRequests();
+	if (is_array($getCancelRequests)&&(count($getCancelRequests)>0)) {
+	?>    
     <h2>Žádosti o ukončení premium členství</h2>
       <table class="prehled_table">
         <tr>
@@ -69,10 +81,10 @@ if($_POST) {
         </tr>
         <?php 
         $i=1; 
-        foreach (getCancelRequests() as $key => $req) {
+        foreach ($getCancelRequests as $key => $req) {
           $email = ($req['email']!='' && $req['email']!='undefined') ? $req['email'] : $req['email_contact'];
           $notice = (!$req['cancel_notice']) ? 'x' : $req['cancel_notice'];
-          $reason = ($CONF_XTRA["premium_cancel_reason"]['cs'][$req['cancel_reason']]);
+          $reason = txt("premium_cancel_reason_".$req['cancel_reason']);
         ?>
           <tr>
             <td><?php echo $i;?></td>
@@ -90,15 +102,18 @@ if($_POST) {
         } // foreach getUsers?>
       </table>  
     <?php } // if getUsers?>    
-    
-    <h2>Přehled</h2>
-    <table class="prehled_table">
-      <?=statistika_celkovy_prehled()?>
-    </table>
+
+	<h2>Přehled</h2>
+	<table class="prehled_table">
+		<?=statistika_celkovy_prehled()?>
+	</table>
+
+
 	</div>
 
 </div><!--/id="admin"-->
 <?
+
 require_once("../inc/footer.php");
 
 /**
@@ -118,6 +133,7 @@ function statistika_prijmu_obdobi()
 			<td><?=$row["month"]."/".$row["year"]?></td><td><?=($row["celkem_mesic"]/100)?></td><td><?=$row["currency"]?></td>
 		</tr>
 <?
+
 	}
 	return ob_get_clean();
 }
@@ -140,6 +156,7 @@ function statistika_delka_trvani()
 			<td><?=$row["month"]."/".$row["year"]?></td><td><?=($row["celkem_mesic"]/100)?></td><td><?=$row["currency"]?></td>
 		</tr>
 <?
+
 	}
 	return ob_get_clean();
 }
@@ -151,6 +168,7 @@ function statistika_delka_trvani()
 */
 function statistika_celkovy_prehled()
 {
+	global $CONF_XTRA;
 	// 1. hash dat odberatele
 	dbQuery("SELECT nazev, fb_id FROM odberatel");
 	while($row = dbArr())
@@ -168,7 +186,7 @@ function statistika_celkovy_prehled()
 //	$wh = " AND gopay_parent_id IS NOT NULL";
 	$wh = "";
 	// 3. nactu vsechny platby!
-	dbQuery("SELECT p.zalozeno, UNIX_TIMESTAMP(p.zalozeno) utime, gopay_id, gopay_parent_id, amount, currency, kod, fb_id FROM platba p, owner o, slev_kody k WHERE state = 'PAID' AND spec_slev_kod IS NOT NULL $wh AND spec_slev_kod=kod AND owner_fb_id=fb_id ORDER BY zalozeno;");
+	dbQuery("SELECT p.zalozeno, UNIX_TIMESTAMP(p.zalozeno) utime, UNIX_TIMESTAMP(p.zaplaceno_do) time_zaplaceno_do, gopay_id, gopay_parent_id, amount, currency, kod, fb_id, what_platby FROM platba p, owner o, slev_kody k WHERE state = 'PAID' AND spec_slev_kod IS NOT NULL $wh AND spec_slev_kod=kod AND owner_fb_id=fb_id ORDER BY zalozeno;");
 	while($row = dbArrTiny()) {
 		$members_platby[$row["fb_id"]][] = $row;
 //		pre($row);
@@ -184,7 +202,7 @@ function statistika_celkovy_prehled()
 	}
 
 	$j = 1;
-	foreach($members as $gopay_id => $data) {
+	foreach($members as $fb_id => $data) {
 		$class = "status_".$data["status_owner"];
 
 		ob_start();
@@ -197,8 +215,8 @@ function statistika_celkovy_prehled()
 		$table .= "<td class=\"edit_fakturace".($hash_odb[$data["fb_id"]] ? " done " : "")."\" rel=\"".$data["fb_id"]."\">".$data["fb_id"]."</td>";
 		$table .= "<td>".($data["amount"]/100)." ".$data["currency"]."</td>";
 		$table .= "<td>";
-		if($members_platby[$gopay_id]) {
-			foreach($members_platby[$gopay_id] as $k => $data_platba) {
+		if($members_platby[$fb_id]) {
+			foreach($members_platby[$fb_id] as $k => $data_platba) {
 				if($data_platba["kod"] != $old_kod)
 					$table .= $data_platba["kod"]."<br>";
 				$old_kod = $data_platba["kod"];
@@ -206,12 +224,18 @@ function statistika_celkovy_prehled()
 		}
 		$table .= "</td>";
 		$i = 1;
-		if($members_platby[$gopay_id]) {
-			foreach($members_platby[$gopay_id] as $k => $data_platba) {
+		if($members_platby[$fb_id]) {
+			foreach($members_platby[$fb_id] as $k => $data_platba) {
 				$class_po_terminu = "ok";
-				if($i == count($members_platby[$gopay_id]))
+				if($i == count($members_platby[$fb_id])) {
 					$class_po_terminu = strtotime("+1 month", $data_platba["utime"]) < time() ? "po_terminu" : "";
 //					$class_po_terminu = strtotime("+1 month +2 days", $data_platba["utime"]) < time() ? "po_terminu" : "";
+//					if($i == 1 && (strpos($data_platba["what_platby"], "premium") !== false || $data_platba["what_platby"] == "pdf26napadu")) 
+					if($i == 1 && $data_platba["what_platby"] && in_array($data_platba["what_platby"], $CONF_XTRA["premium_SSP"])) {
+						$class_po_terminu = strtotime("+14 days", $data_platba["utime"]) < time() ? "po_terminu" : "";
+					}
+					$class_po_terminu =  $data_platba["time_zaplaceno_do"] < time() ? "po_terminu" : "";
+				}
 				$table .= "\n<td class=\"".$class_po_terminu."\">".$data_platba["zalozeno"]."</td>\n";
 				$i++;
 			}

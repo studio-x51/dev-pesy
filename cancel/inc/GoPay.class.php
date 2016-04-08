@@ -27,6 +27,11 @@ class GoPay extends Base {
 																			'TIMEOUTED'=>'Vypršelá platnost platby',
 																			'REFUNDED'=>'Platba refundována',
 																			'PARTIALLY_REFUNDED'=>'Platba částečně refundována');
+															
+	public static $payment_cycle = array('M'=>'MONTH',
+																			'W'=>'WEEK',
+																			'D'=>'DAY',
+																			'OD'=>'ON_DEMAND');																		
 																			
 	private $payment_data;
   
@@ -123,12 +128,22 @@ class GoPay extends Base {
     }			
 	}  
 
-
+	/**
+	* Evocation outside the class, somewhere in process script
+	* @param array	- definition of paymet data values, that are used in payment functions
+	* 							-	set data for payment into variable $payment_data
+	* @see getPaymentData 									
+	*/
 	public function setPaymentData(array $paymentData) {
 		if (!$paymentData) return;
 		$this->payment_data = $paymentData;
 	}
-	
+
+	/**
+	* Get canned array of payment
+	* @return array	- variable $payment_data
+	* @see setPaymentData	
+	*/	
 	public function getPaymentData() {
 		if (!is_array($this->payment_data)) return;
 		return $this->payment_data;
@@ -136,8 +151,10 @@ class GoPay extends Base {
 
 	
 	/**
-	 * TODO - argumenty funkce, prenaset definici pole dat (contact apod.)
-	 * @param array $paymentData - array of important data to create payment	 	
+	 * Function that create base gopay payment
+	 * @param array $paymentData - array of important data to create payment
+	 * @return json - json_decode array, important is value of gw_url (for evocation of payment gateway)
+	 * @see gateWayInline, gateWayRedirect	  	 	 	
 	 */
 	public function createPayment() {
 		//if (!$paymentData) return;
@@ -173,11 +190,10 @@ class GoPay extends Base {
 			),
 			// !!! POZOR nemenit poradi, zapisuji podle indexu !!!
 			"additional_params" => array(
-				array("name"=>"from","value"=>'5.4.2016'),
+				/*array("name"=>"from","value"=>'5.4.2016'),
 				array("name"=>"to","value"=>'5.5.2016'),
-				array("name"=>"months","value"=>'1'), // delka trvani v mesicich
-				array("name"=>"druh_platby","value"=>'standard'), // druh platby standard, premium, .../ defaultne standard
-				// max. 4 parametry, jinak nemaka :-(			
+				array("name"=>"months","value"=>'1'),
+				array("name"=>"druh_platby","value"=>'standard')*/
 			), 
 			"callback"=> array(
 				"return_url"=> 'http://www.petrsyrny.cz/utils/gopay/return.php',
@@ -214,12 +230,98 @@ class GoPay extends Base {
   
   
 	/**
+	 *
+	 * @param array $paymentData - array of important data to create payment
+	 * @return json - json_decode array, important is value of gw_url (for evocation of payment gateway)
+	 * @see gateWayInline, gateWayRedirect	  	 	 	
+	 */  
+  public function createRecurrencePayment() {
+		$path_file = __DIR__.'/logs/gopay_create_payment.log';
+		$paymentToken = $this->getPaymentToken();
+		$pd = $this->getPaymentData();
+		$data = array(
+			"payer" => array(
+				"default_payment_instrument"=>"PAYMENT_CARD", // defaulten nastavene, ale lze prepnout platebni metodu - nahore nad oknem!
+				"allowed_payment_instruments"=>array("PAYMENT_CARD"), // vsechny platebni metody mohou byt v poli - array("PAYMENT_CARD", "MPAYMENT")
+				"contact" => array(
+					"first_name"=>$pd['contact']['first_name'],
+					"last_name"=>$pd['contact']['last_name'],
+					"email"=>$pd['contact']['email'],
+					"phone_number"=>$pd['contact']['phone_number'],
+					"city"=>$pd['contact']['city'],
+					"street"=>$pd['contact']['street'],
+					"postal_code"=>$pd['contact']['postal_code'],
+					"country_code"=>$pd['contact']['country_code']
+					)
+			),
+			"target" => array(
+				"type"=>"ACCOUNT",
+				"goid"=>$this->goId
+			),
+			"amount"=> '1900', // cena v halerich
+			"currency"=> 'CZK',
+			"order_number"=> '10000005',
+			"order_description" => 'testovaci opakujici se platba z API',
+			"items"=> array(
+				//array("name"=>"item01","amount"=>"1000"),
+				//array("name"=>"item02","amount"=>"666")
+			),
+			// !!! POZOR nemenit poradi, zapisuji podle indexu !!!
+			"additional_params" => array(
+				/*array("name"=>"from","value"=>'5.4.2016'),
+				array("name"=>"to","value"=>'5.5.2016'),
+				array("name"=>"months","value"=>'1'),
+				array("name"=>"druh_platby","value"=>'standard')*/
+			), 
+			"recurrence" => array(
+			"recurrence_cycle" => $pd['recurrence']['recurrence_cycle'], // MONTH, WEEK, DAY, ON_DEMAND | ON_DEMAND
+			"recurrence_period" => $pd['recurrence']['recurrence_period'], // 1 - kazdy mesic, tyden, den | 2 - kazdy 2. mesic, 2. tyden, 2. den!
+			"recurrence_date_to"=> $pd['recurrence']["recurrence_date_to"] // do kdy se plati {format: 2015-12-31}
+		),			
+			"callback"=> array(
+				"return_url"=> 'http://www.petrsyrny.cz/utils/gopay/return.php',
+				"notification_url"=> 'http://www.petrsyrny.cz/utils/gopay/notify.php',
+			),
+			"lang"=>'cs'
+		);
+		$this->log->logit("debug","GOPAY createRecurrencePayment gopay-payment_url: ".$this->sandbox_gopay_payment_url, $path_file);
+		$this->log->logit("debug","GOPAY createRecurrencePayment data: ".serialize($data), $path_file);
+		$data_string = json_encode($data);
+		// create a new cURL resource
+		$ch = curl_init();
+		// set URL and other appropriate options
+		curl_setopt($ch, CURLOPT_URL, $this->sandbox_gopay_payment_url);
+		curl_setopt($ch, CURLOPT_POST, 1); 
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string); 
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Accept: application/json',
+			'Content-Type: application/json',                                                                                
+			'Authorization: Bearer '.$paymentToken->access_token
+	//		'Content-Length: ' . strlen($data_string)
+			)
+		);
+		ob_start(); 
+		// grab URL and pass it to the browser
+		curl_exec($ch);
+		// close cURL resource, and free up system resources
+		curl_close($ch);
+		$str = ob_get_clean(); 
+		//echo $str;
+		$this->log->logit("debug","GOPAY createRecurrencePayment  : $str", $path_file);
+		return json_decode($str);  
+  
+	}
+  
+  
+	/**
 	* Inline gateway
 	* - to show gateway, do echo of this function (show button)	
+	* @param string $createPaymentType - type of payment type (classic payment or recurrence payment)
+	* @see createPayment, createRecurrencePayment	 	
 	*/
-	public function gateWayInline() {
+	public function gateWayInline($createPaymentType) {
 		ob_start();
-		$createPayment = $this->createPayment();
+		$createPayment = $createPaymentType;
 		?>
 		<!-- platebni brana -->
 		<form action="<?echo $createPayment->gw_url;?>" method="post" id="gopay-payment-button">
@@ -233,10 +335,12 @@ class GoPay extends Base {
 	
 	/**
 	* Redirect gateway
+	* @param string $createPaymentType - type of payment type (classic payment or recurrence payment)
+	* @see createPayment, createRecurrencePayment		
 	*/
-	public function gateWayRedirect() {
+	public function gateWayRedirect($createPaymentType) {
 		ob_start();
-		$createPayment = $this->createPayment();
+		$createPayment = $createPaymentType;
 		?>
 		<!-- platebni brana -->
 		<form action="<?echo $createPayment->gw_url;?>" method="post">

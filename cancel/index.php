@@ -15,7 +15,12 @@ include_once '../aa/inc/global_parameters.php'; // zmenit cestu
 //include_once '../aa-test-pesy/inc/global_parameters.php'; 
 
 /* pole hodnot pro select odpovedi */
-$answer_arr = $CONF_XTRA["premium_cancel_reason"]['cs'];
+$answer_arr = array('1'=>$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_1"],
+                    '2'=>$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_2"],
+                    '3'=>$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_3"],
+                    '4'=>$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_4"],
+                    '5'=>$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_5"],
+                    '6'=>$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_6"]);
 
 /*  instance tridy Form, autoload tridy
  *  drzeni hodnoty formulare, pokud nefunguje validace pomoci bootstrap a js */

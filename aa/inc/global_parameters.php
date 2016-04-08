@@ -1,6 +1,6 @@
 <?
-// nasataveni global pro vsechny apky!
-$CONF_XTRA["TIME_FILES"] = "2016030801";
+// nastaveni global pro vsechny apky!
+$CONF_XTRA["TIME_FILES"] = "2016040701";
 $CONF_XTRA["smartmailing"]["premium"] = 69;
 $CONF_XTRA["smartmailing"]["premium_academy"] = 82;
 $CONF_XTRA["smartmailing"]["pdf26napadu"] = 91;
@@ -59,6 +59,7 @@ $CONF_XTRA["texty"]["cs"]["ss-fb_og_description"] = "Přidejte na svou firemní 
 $CONF_XTRA["texty"]["cs"]["dashboard-description_licence-premium"] = "SocialSprinters Premium Members";
 $CONF_XTRA["texty"]["cs"]["setting-platba_description-ss_premium_members"] = "SocialSprinters Premium Members";
 $CONF_XTRA["texty"]["cs"]["setting-platba_description-ss_premium_academy"] = "Studio x51 Academy PREMIUM";
+$CONF_XTRA["texty"]["cs"]["setting-platba_description-ss_premium_trial"] = "Studio x51 Academy PREMIUM Trial";
 $CONF_XTRA["texty"]["cs"]["setting-platba_description-ss_pdf26napadu"] = "Video ze Studio x51 academy";
 $CONF_XTRA["texty"]["cs"]["setting-platba_description-ss_premium_members-button_vstup"] = "Vstoupit do aplikace";
 $CONF_XTRA["texty"]["cs"]["setting-platba_description-ss_premium_members-title-gratulace"] = "Gratulujeme. Platba byla úspěšná";
@@ -111,7 +112,7 @@ $CONF_XTRA["texty"]["cs"]["reset_app_7_title"] = "Zkus štěstí na kole štěst
 $CONF_XTRA["texty"]["cs"]["reset_app_7_descr"] = "Roztoč na naší stránce každý den kolo štěstí a vyhraj některou ze skvělých cen!";
 $CONF_XTRA["texty"]["cs"]["reset_app_7_typ"] = "Zkus štěstí na kole štěstí!";
 $CONF_XTRA["texty"]["cs"]["reset_app_8_title"] = "Instagram";
-$CONF_XTRA["texty"]["cs"]["reset_app_8_descr"] = "Instagram";
+$CONF_XTRA["texty"]["cs"]["reset_app_8_descr"] = "Sledujte nás na Instagramu";
 $CONF_XTRA["texty"]["cs"]["reset_app_8_typ"] = "Instagram";
 
 $CONF_XTRA["texty"]["cs"]["setting-vstup-placeholder_zadejte_heslo"] = "Zadejte heslo";
@@ -157,6 +158,7 @@ $CONF_XTRA["texty"]["cs"]["setting-posledni_krok-link-dashboard"] = "Přehled ap
 $CONF_XTRA["texty"]["cs"]["setting-adress_upravte_pole"] = "Upravte pole v kontaktním formuláři";
 $CONF_XTRA["texty"]["cs"]["setting-adress_vyzadovat"] = "Vyžadovat";
 $CONF_XTRA["texty"]["cs"]["setting-adress_add_field"] = "+ přidat další pole";
+$CONF_XTRA["texty"]["cs"]["link-ziskat-vyhodneji_ss-premium"] = "Získejte ji výhodněji jako člen SocialSprinters Premium";
 
 $CONF_XTRA["texty"]["cs"]["setting-placeholder_zadejte_og_title"] = "Zadejte titulek";
 $CONF_XTRA["texty"]["cs"]["setting-placeholder_zadejte_og_description"] = "Zadejte popis";
@@ -269,11 +271,11 @@ $CONF_XTRA["texty"]["cs"]["all-app_config_1_info"] = "Soutěže, ve kterých lid
 $CONF_XTRA["all-app_config"][4]["aplikace_typ_id"] = 7; // atribut rel
 $CONF_XTRA["texty"]["cs"]["all-app_config_4_name"] = "Kola štěstí";
 $CONF_XTRA["texty"]["cs"]["all-app_config_4_info"] = "Soutěžící roztáčejí kolo štěstí a snaží se trefit pole na kterém je umístěna výhra.";
-/* fotosoutez */
+/* fotosoutez 1 */
 $CONF_XTRA["all-app_config"][7]["aplikace_typ_id"] = 1; // atribut rel
 $CONF_XTRA["texty"]["cs"]["all-app_config_7_name"] = "Fotosoutěže";
 $CONF_XTRA["texty"]["cs"]["all-app_config_7_info"] = "Soutěžící nahrávají tématické fotky, pro které následně získavají hlasy od svých přátel.";
-/*  */
+/* budovani databaze 6 */
 $CONF_XTRA["all-app_config"][3]["aplikace_typ_id"] = 6; // atribut rel
 $CONF_XTRA["texty"]["cs"]["all-app_config_3_name"] = "Budování databáze";
 $CONF_XTRA["texty"]["cs"]["all-app_config_3_info"] = "Získejte e-mailové adresy fanoušků do vaší e-mailové databáze pro další komunikaci.";
@@ -286,10 +288,10 @@ $CONF_XTRA["texty"]["cs"]["all-app_config_8_name"] = "Vědomostní testy";
 $CONF_XTRA["texty"]["cs"]["all-app_config_8_info"] = "Otestujte své fanoušky nebo od nich získejte zpětnou vazbu pomocí kvízů a testů.";
 
 /* Instagram */
-$CONF_XTRA["all-app_config"][10]["aplikace_typ_id"] = 0; // atribut rel
+$CONF_XTRA["all-app_config"][10]["aplikace_typ_id"] = 8; // atribut rel
 //if($_SERVER["REMOTE_ADDR"] == "84.42.152.67")
-if($_SESSION["x51admin"])
-	$CONF_XTRA["all-app_config"][10]["aplikace_typ_id"] = 8; // atribut rel
+//if($_SESSION["x51admin"])
+//	$CONF_XTRA["all-app_config"][10]["aplikace_typ_id"] = 8; // atribut rel
 $CONF_XTRA["texty"]["cs"]["all-app_config_10_name"] = "Instagram";
 $CONF_XTRA["texty"]["cs"]["all-app_config_10_info"] = "Propojte si vaši Facebookovou stránku s Instagram účtem, nebo specifickým #hashtagem, pod kterým lidé sdílejí fotografie o vás.";
 
@@ -448,6 +450,7 @@ $CONF_XTRA["texty"]["cs"]["setting-placeholder_zadejte_url_baneru"] = "Zadejte u
 
 $CONF_XTRA["texty"]["cs"]["setting-confirm_delete_price"] = "Opravdu smazat cenu?";
 $CONF_XTRA["texty"]["cs"]["form_check-err_sorry_you_are_premium"] = "Tato objednávková stránka je pouze pro nové členy. Pokud chcete za zvýhodněnou cenu získat členství ve Studio x51 Academy, napište nám na email kamca@socialsprinters.cz. Kamča vám členství obratem vytvoří  :-)";
+$CONF_XTRA["texty"]["cs"]["form_check-err_sorry_you_are_premium-trial"] = "Tato objednávková stránka je pouze pro nové členy.";
 $CONF_XTRA["texty"]["cs"]["setting-err_nezadany_vyhry"] = "Přidejte soutěžní ceny :-)";
 $CONF_XTRA["texty"]["cs"]["setting-err_zvolte_pravdepodobnost_vyhry"] = "Zvolte pravděpodobnost výhry";
 $CONF_XTRA["texty"]["cs"]["setting-err_zadejte_nazev_vyhry"] = "Zadejte název výhry";
@@ -485,7 +488,7 @@ $CONF_XTRA["texty"]["cs"]["odberatel-stat"] = "Stát";
 
 
 /* nahledy app */
-$CONF_XTRA["nahled_aplikace"] = array(1=>857, 2=>52, 3=>1369, 4=>395, 6=>399, 7=>320);
+$CONF_XTRA["nahled_aplikace"] = array(1=>857, 2=>52, 3=>1369, 4=>395, 6=>399, 7=>320, 8=>2007);
 $CONF_XTRA["texty"]["cs"]["setting-text_nahled_link_app2fb"] = "Jak vypadá aplikace na Facebook stránce?";
 // app 1 - fotosoutez
 $CONF_XTRA["nahled_app_url_1"] = "https://x51.cz/apps/ssp-fotosoutez?aplikace_id=".$CONF_XTRA["nahled_aplikace"][1];
@@ -507,6 +510,9 @@ $CONF_XTRA["nahled_app_url_7"] = "https://x51.cz/apps/ssp-kolo-stesti/?aplikace_
 if(strpos($_SERVER["SCRIPT_NAME"], "aa-test"))
 	$CONF_XTRA["nahled_app_url_7"] = "https://x51.cz/apps/ssp-kolo-stesti-test/?aplikace_id=".$CONF_XTRA["nahled_aplikace"][7];
 $CONF_XTRA["nahled_app_fb_url_7"] = "https://www.facebook.com/socialsprinters/app_726722437473534";
+// app 8 - instagram
+$CONF_XTRA["nahled_app_url_8"] = "https://x51.cz/apps/ssp-instagram/?aplikace_id=".$CONF_XTRA["nahled_aplikace"][8];
+$CONF_XTRA["nahled_app_fb_url_8"] = "https://www.facebook.com/socialsprinters/?sk=app_969670826454383";
 
 // texty app 1 - fotosoutez
 $CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_1"] = "
@@ -534,9 +540,10 @@ $CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_1"] = "
 <li>Pomocí soutěže zvýšíte aktivitu vašich stávajících fanoušků</li>
 <li>Motivujete soutěžící k okamžitému nákupu</li>
 <li>Zvýšíte loajalitu fanoušků k vaší značce</li>
-</ul>
+</ul>";
 
-<p>Pořizovací cena: <span class='price'>4500 Kč/měsíc</span></p>
+$CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_porizovaci_cena_1"] = "
+<p>Pořizovací cena: <span class='price'>%price_app_per_month% Kč/měsíc</span></p>
 ";
 
 
@@ -574,9 +581,10 @@ a přitom zachováte exkluzivitu vaší značky</li>
 stávajících fanoušků</li>
 <li>Motivujete soutěžící k okamžitému nákupu</li>
 <li>Zvýšíte loajalitu fanoušků k vaší značce</li>
-</ul>
+</ul>";
 
-<p>Pořizovací cena: <span class='price'>2990 Kč/měsíc</span></p>
+$CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_porizovaci_cena_2"] = "
+<p>Pořizovací cena: <span class='price'>%price_app_per_month% Kč/měsíc</span></p>
 ";
 
 
@@ -601,9 +609,10 @@ $CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_3"] = "
 <li>Zvyšujete povědomí o vaší firmě a můžete edukovat zákazníky o vašich produktech a službách</li>
 <li>Prostřednictvím aplikace získáváte nové fanoušky</li>
 <li>Získáte nové emailové adresy (např. pro rozesílku newsletteru)</li>
-</ul>
+</ul>";
 
-<p>Pořizovací cena: <span class='price'>2300 Kč/měsíc</span></p>
+$CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_porizovaci_cena_3"] = "
+<p>Pořizovací cena: <span class='price'>%price_app_per_month% Kč/měsíc</span></p>
 ";
 
 
@@ -627,9 +636,10 @@ $CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_4"] = "
 <ul>
 <li>Sdělíte všechny potřebné informace návštěvníkovi v přehledné záložce</li>
 <li>Tlačítkem v záložce můžete návštěvníka přivést na vaše webové stránky</li>
-</ul>
+</ul>";
 
-<p>Pořizovací cena: <span class='price'>první záložka zdarma, druhá za 100 Kč/měsíčně</span></p>
+$CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_porizovaci_cena_4"] = "
+<p>Pořizovací cena: <span class='price'>první záložka zdarma, druhá za %price_app_per_month% Kč/měsíčně</span></p>
 ";
 
 // texty app 6 - budovani databaze
@@ -654,11 +664,11 @@ $CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_6"] = "
 <li>Máte možnost vyžádat si také telefonní čísla a další údaje</li>
 <li>Zvýšíte loajalitu fanoušků k vaší značce</li>
 <li>Budete se profilovat jako expert na danou oblast</li>
-</ul>
+</ul>";
 
-<p>Pořizovací cena: <span class='price'>990 Kč/měsíc</span></p>
+$CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_porizovaci_cena_6"] = "
+<p>Pořizovací cena: <span class='price'>%price_app_per_month% Kč/měsíc</span></p>
 ";
-
 
 // texty app 7 - kolo stesti;
 $CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_7"] = "
@@ -689,10 +699,39 @@ administraci soutěže. Soutěž spustíte do několika minut.
 <li>Rozdáte fanouškům slevy a přitom zachováte exkluzivitu vaší značky</li>
 <li>Soutěžící vám pomáhají šířit povědomí o vaší značce napříč Facebookem</li>
 <li>Motivujete soutěžící k okamžitému nákupu</li>
-</ul>
+</ul>";
 
-<p>Pořizovací cena: <span class='price'>2900 Kč/měsíc</span></p>
+$CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_porizovaci_cena_7"] = "
+<p>Pořizovací cena: <span class='price'>%price_app_per_month% Kč/měsíc</span></p>
 ";
+
+// texty app 8 - instagram;
+$CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_8"] = "
+<h2>Detail aplikace</h2>
+<h3>Typ aplikace</h3>
+<div class='name_app app_8'>Instagram</div>
+
+<h3>Jak funguje</h3>
+<p>
+Každý den na vaši stránku na Facebooku chodí desítky, možná stovky lidí, kteří se o vás chtějí dozvědět více informací. Pomocí tohoto typu aplikace máte možnost ukázat jim více ze svého soukromí. Ukažte svým fanouškům váš Instagramový účet přímo na Facebook stránce. Aplikace se propojí s vaším Instagramový účtem, kde máte možnost výběrů zobrazení vašeho profilu nebo vyhledání čehokoli pod daným hashtagem. Jako administrátor nastavíte kompletní vzhled vaší aplikace Instagram (včetně tlačítka SLEDOVAT, díky kterému váš Instagramový účet získá větší počet sledujících). Upravíte texty a za pár minut máte profesionální aplikaci Instagram hotovou.
+</p>
+
+<h3>Co budete potřebovat</h3>
+<ol>
+<li>Správcovství na vaší Facebook stránce</li>
+<li>Instagramový profil</li>
+</ol>
+
+<h3>Výhody</h3>
+<ul>
+<li>Ukažte svým fanouškům a návštěvníkům vaše fotky z Instagramového účtu</li>
+<li>Díky tlačítku “sledovat“ získá váš Instagramový účet větší počet sledujících</li>
+</ul>";
+
+$CONF_XTRA["texty"]["cs"]["setting-text_nahled_app_porizovaci_cena_8"] = "
+<p>Pořizovací cena: <span class='price'>%price_app_per_month% Kč/měsíc</span></p>
+";
+
 
 
 
@@ -756,6 +795,7 @@ $CONF_XTRA["texty"]["cs"]["demo-app_3_descr"] = "Jako administrátor si jednodu�
 $CONF_XTRA["texty"]["cs"]["demo-app_4_descr"] = "Jako administrátor si jednoduše přizpůsobíte vzhled celé aplikace, změníte hlavní motiv, přidáte text, obrázky, nebo video a informační záložku do několika minut spustíte na vaší Facebookové stránce.";
 $CONF_XTRA["texty"]["cs"]["demo-app_6_descr"] = "Jako administrátor si jednoduše přizpůsobíte vzhled celé aplikace, změníte hlavní motiv, přidáte text, soubor ke stažení a do několika minut začnete sbírát emailové adresy zákazníků na vaší Facebookové stránce.";
 $CONF_XTRA["texty"]["cs"]["demo-app_7_descr"] = "Jako administrátor si jednoduše přizpůsobíte vzhled celé aplikace, změníte hlavní motiv, nastavíte výhry a soutěž spustíte do několika minut na vaší Facebookové stránce.";
+$CONF_XTRA["texty"]["cs"]["demo-app_8_descr"] = "Aplikace se propojí s vaším Instagramový účtem, kde máte možnost výběrů zobrazení vašeho profilu nebo vyhledání klíčového slova pod daným hashtagem.";
 
 /* /demo aplikace */
 
@@ -941,6 +981,13 @@ $CONF_XTRA["texty"]["cs"]["HELP-TEXT_SET-FB_OG_button"] = "Ok, jdu na to.";
 
 /* / TEXTY APLIKACE 8 INSTAGRAM */
 $CONF_XTRA["texty"]["cs"]["setting-APP-8-default_text-title"] = "<p>Sleduj náš profil na Instagramu a budeš mít jako první přehled o všem, co pro vás připravujeme! Pravidelně přidáváme fotografie z tréninků, akcí a posiloven, takže se na našem profilu můžeš objevit i ty! :)</p>";
+$CONF_XTRA["texty"]["cs"]["setting-APP-8-login_instagram_intro"] = "<h2>Připojte Instagram účet</h2><p>Nejprve s aplikací propojte Instagram, ze kterého chcete<br /> načíst vaše fotografie.</p>";
+$CONF_XTRA["texty"]["cs"]["setting-APP-8-login_instagram"] = "Přihlásit se na Instagram";
+$CONF_XTRA["texty"]["cs"]["setting-APP-8-logout_instagram"] = "odhlásit";
+$CONF_XTRA["texty"]["cs"]["HELP-TEXT_SET-INSTAGRAM-LOGIN_title"] = "Přihlášení do aplikace Instagram";
+$CONF_XTRA["texty"]["cs"]["HELP-TEXT_SET-INSTAGRAM-LOGIN_text"] = "K propojení aplikace s vaším Instagram účtem musíte být přihlášeni v prohlížeči na www.instagram.com. Pokud přihlášení nejste, Instagram vás k tomu vyzve ve vyskakovacím okně.";
+$CONF_XTRA["texty"]["cs"]["HELP-TEXT_SET-INSTAGRAM-chanell_set_title"] = "Nastavení zdroje pro fotky ve vaší aplikaci";
+$CONF_XTRA["texty"]["cs"]["HELP-TEXT_SET-INSTAGRAM-chanell_set_text"] = "Můžete přepínat mezi dvěma zdroji pro fotografie ve vaší aplikaci. Váš profil na instagramu pod kterým jste přihlášeni v aplikaci, nebo hashtag, který vyplníte do druhé kolonky.";
 
 
 /* picedit */
@@ -975,7 +1022,17 @@ $CONF_XTRA["texty"]["cs"]["picedit-tiptext_before"] = "<h2>Přidejte do grafiky 
 $CONF_XTRA["texty"]["cs"]["picedit-tiptext_after"] = "<h2>Úprava vašeho obrázku</h2>
 <p>Využijte nástroje v liště a až bude obrázek připravený, klikněte<br /> na zelené tlačítko <strong>Nahrát</strong></p>";
 
-/* */
+/* /picedit */
+
+/* texty DUVOD ZRUSENI PREMIUM CLENSTVI */
+$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_1"] = 'Tuto službu nemám kde využít, není pro mě';
+$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_2"] = 'Momentálně nemám čas se službou zabývat';
+$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_3"] = 'Měsíční poplatek je vysoký';
+$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_4"] = 'Celkově mi služba nevyhovuje';
+$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_5"] = 'Ani jedna z dostupných aplikací mi nevyhovuje';
+$CONF_XTRA["texty"]["cs"]["premium_cancel_reason_6"] = 'Efektivita aplikací nesplnila moje očekávání'; 
+/* /DUVOD ZRUSENI PREMIUM CLENSTVI */
+
 
 /* CENY APLIKACI */
 // 1) aplikace_typ_id = 1, fotosoutez
@@ -1041,11 +1098,4 @@ $CONF_XTRA["price"][8]["12M_DISCOUNT"] = "0.30"; // 20% sleva pri platbe na 9 me
 
 /* /CENY APLIKACI */
 
-/* DUVOD ZRUSENI PREMIUM CLENSTVI */
-$CONF_XTRA["premium_cancel_reason"]['cs'] = array('1'=>'Tuto službu nemám kde využít, není pro mě',
-                                                  '2'=>'Momentálně nemám čas se službou zabývat',
-                                                  '3'=>'Měsíční poplatek je vysoký',
-                                                  '4'=>'Celkově mi služba nevyhovuje',
-                                                  '5'=>'Ani jedna z dostupných aplikací mi nevyhovuje',
-                                                  '6'=>'Efektivita aplikací nesplnila moje očekávání'); 
-/* /DUVOD ZRUSENI PREMIUM CLENSTVI */
+?>

@@ -1,5 +1,5 @@
 <?php
-class PHPMailer {
+class PhpMailer {
 
   /////////////////////////////////////////////////
   // PROPERTIES, PUBLIC

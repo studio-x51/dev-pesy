@@ -107,7 +107,7 @@ class CancelForm extends Base {
         if ($this->setOwnerCancelRequest($fb_id, $cancel_reason, $cancel_notice)) {
           $this->log->logit('debug','zadost ulozena, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.'');
           $se = new SmartEmailing();
-          $message = 'Žadatel<br /> FB_ID: '.$fb_id.' <br /> email: '.$email.' <br /> uzivatel: '.$lastname.' '.$firstname.'';
+          $message = '<br />Žadatel: '.$lastname.' '.$firstname.'<br /> FB_ID: '.$fb_id.' <br /> Email: '.$email.' <br />';
           $this->sendAcceptedEmail($message);
           if ($se->removeEmailFromTo($email, SmartEmailing::$premium_list_id, SmartEmailing::$premium_cancel_id) == true) {
             $this->log->logit('debug','smartemailing prevod kontaktu, email: '.$email.', uzivatel: '.$lastname.' '.$firstname.', from: '.SmartEmailing::$premium_list_id.' do: '.SmartEmailing::$premium_cancel_id.'');
@@ -128,15 +128,15 @@ class CancelForm extends Base {
   
   public function sendAcceptedEmail($message) {
     $send_to = 'info@kulturne.com';
-    $mail = new PHPMailer();
+    $mail = new PhpMailer();
     $mail->CharSet = "utf-8";
     $mail->ContentType = "text/html";
     $mail->From  = 'noreply@x51.cz';
     $mail->FromName = 'noreply@x51.cz';
     $mail->AddAddress($send_to, "");        
-    $mail->Subject = 'Nová žádost o ukončení premium členství';
+    $mail->Subject = 'NOTIFIKACE: žádost o ukončení premium členství';
     $mail->Body = "Právě byla zaznamenáná nová žádost o zrušení premium členství. Přehled žádostí naleznete v administraci SS. <br />";
-    $mail->Body .= $message."<br />";        
+    $mail->Body .= $message."<br /><br />";        
     $mail->Body .= 'Na tento email neodpovídejte. Jedná se o automatickou notifikaci.';
     if(!$mail->Send()) {
       return false;  			
